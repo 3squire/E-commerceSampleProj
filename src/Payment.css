@@ -1,0 +1,11 @@
+.payment-summary {
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #dce4ff;
+}
+
+.payment-summary p {
+  margin-bottom: 4px;
+}
