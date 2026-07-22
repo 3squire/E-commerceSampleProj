@@ -94,7 +94,12 @@ function Wishlist() {
           <a
             className="wishlist-btn"
             href="#"
-            onClick={(event) => event.preventDefault()}
+            onClick={(event) => {
+              event.preventDefault()
+              if (wishlist.length > 0) {
+                setStep('cart')
+              }
+            }}
           >
             Cart
           </a>
@@ -105,65 +110,67 @@ function Wishlist() {
       </header>
 
       <main className="wishlist-view">
-        <div className="view-header">
-          <h2>Your wishlist</h2>
-          <span className="pill">{wishlist.length} selected</span>
-        </div>
-
-        <section className="product-grid">
-          {featuredItems.map((item) => (
-            <article className="product-card" key={item.id}>
-              <div className="product-card__top">
-                <span className="pill">{item.tag}</span>
-                <button
-                  className="heart-btn"
-                  onClick={() => handleSave(item)}
-                  aria-label={`Save R{item.name} to wishlist`}
-                >
-                  ♡
-                </button>
-              </div>
-              <h3>{item.name}</h3>
-              <p>{item.blurb}</p>
-              <div className="product-card__footer">
-                <span>{item.price}</span>
-                <button className="text-btn" onClick={() => handleSave(item)}>
-                  Add
-                </button>
-              </div>
-            </article>
-          ))}
-        </section>
-
-        {wishlist.length === 0 ? (
-          <div className="empty-state">
-            <h3>No saved items yet</h3>
-            <p>Select an item above and it will appear here.</p>
-          </div>
-        ) : (
+        {step === 'wishlist' && (
           <>
-            <ul className="wishlist-list">
-              {wishlist.map((item) => (
-                <li className="wishlist-item" key={item.id}>
-                  <div>
-                    <h3>{item.name}</h3>
-                    <p>{item.blurb}</p>
-                  </div>
-                  <span>{item.price}</span>
-                </li>
-              ))}
-            </ul>
+            <div className="view-header">
+              <h2>Your wishlist</h2>
+              <span className="pill">{wishlist.length} selected</span>
+            </div>
 
-            {step === 'wishlist' && (
-              <div className="checkout-actions">
-                <div className="summary-box">
-                  <p>Total due</p>
-                  <strong>R{total.toFixed(2)}</strong>
-                </div>
-                <button className="primary-btn" onClick={() => setStep('cart')}>
-                  Go to cart
-                </button>
+            <section className="product-grid">
+              {featuredItems.map((item) => (
+                <article className="product-card" key={item.id}>
+                  <div className="product-card__top">
+                    <span className="pill">{item.tag}</span>
+                    <button
+                      className="heart-btn"
+                      onClick={() => handleSave(item)}
+                      aria-label={`Save R{item.name} to wishlist`}
+                    >
+                      ♡
+                    </button>
+                  </div>
+                  <h3>{item.name}</h3>
+                  <p>{item.blurb}</p>
+                  <div className="product-card__footer">
+                    <span>{item.price}</span>
+                    <button className="text-btn" onClick={() => handleSave(item)}>
+                      Add
+                    </button>
+                  </div>
+                </article>
+              ))}
+            </section>
+
+            {wishlist.length === 0 ? (
+              <div className="empty-state">
+                <h3>No saved items yet</h3>
+                <p>Select an item above and it will appear here.</p>
               </div>
+            ) : (
+              <>
+                <ul className="wishlist-list">
+                  {wishlist.map((item) => (
+                    <li className="wishlist-item" key={item.id}>
+                      <div>
+                        <h3>{item.name}</h3>
+                        <p>{item.blurb}</p>
+                      </div>
+                      <span>{item.price}</span>
+                    </li>
+                  ))}
+                </ul>
+
+                <div className="checkout-actions">
+                  <div className="summary-box">
+                    <p>Total due</p>
+                    <strong>R{total.toFixed(2)}</strong>
+                  </div>
+                  <button className="primary-btn" onClick={() => setStep('cart')}>
+                    Go to cart
+                  </button>
+                </div>
+              </>
             )}
           </>
         )}
