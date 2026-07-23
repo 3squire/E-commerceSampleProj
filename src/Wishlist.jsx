@@ -40,6 +40,7 @@ function Wishlist() {
     phone: '',
   })
   const [payment, setPayment] = useState({
+    paymentMethod: '',
     cardName: '',
     cardNumber: '',
     expiry: '',

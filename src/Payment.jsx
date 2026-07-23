@@ -1,7 +1,7 @@
 import './Payment.css'
 
 function Payment({
-  payment = { cardName: '', cardNumber: '', expiry: '', cvc: '' },
+  payment = { paymentMethod: '', cardName: '', cardNumber: '', expiry: '', cvc: '' },
   onChange = () => {},
   onSubmit = (event) => event.preventDefault(),
   onBack = () => {},
@@ -27,6 +27,20 @@ function Payment({
 
       <div className="form-grid">
         <label>
+          Payment method
+          <select name="paymentMethod" value={payment.paymentMethod} onChange={onChange} required>
+            <option value="" disabled>
+              Select a payment method
+            </option>
+            <option value="Mastercard">Mastercard</option>
+            <option value="PayPal">PayPal</option>
+            <option value="EFT">EFT</option>
+          </select>
+        </label>
+
+        {payment.paymentMethod === 'Mastercard' && (
+          <>
+        <label>
           Cardholder name
           <input name="cardName" value={payment.cardName} onChange={onChange} required />
         </label>
@@ -42,6 +56,8 @@ function Payment({
           CVC
           <input name="cvc" value={payment.cvc} onChange={onChange} required />
         </label>
+          </>
+        )}
       </div>
 
       <button type="submit" className="primary-btn">

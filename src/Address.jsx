@@ -1,5 +1,17 @@
 import './Address.css'
 
+const southAfricanProvinces = [
+  'Eastern Cape',
+  'Free State',
+  'Gauteng',
+  'KwaZulu-Natal',
+  'Limpopo',
+  'Mpumalanga',
+  'Northern Cape',
+  'North West',
+  'Western Cape',
+]
+
 function Address({
   address = {
     fullName: '',
@@ -36,8 +48,17 @@ function Address({
           <input name="city" value={address.city} onChange={onChange} required />
         </label>
         <label>
-          State
-          <input name="state" value={address.state} onChange={onChange} required />
+          Province
+          <select name="state" value={address.state} onChange={onChange} required>
+            <option value="" disabled>
+              Select a province
+            </option>
+            {southAfricanProvinces.map((province) => (
+              <option key={province} value={province}>
+                {province}
+              </option>
+            ))}
+          </select>
         </label>
         <label>
           Postal code
