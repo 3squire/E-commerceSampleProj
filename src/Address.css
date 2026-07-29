@@ -1,13 +1,13 @@
-* {
-  box-sizing: border-box;
+.address-page {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
-.checkout-card {
-  margin-top: 20px;
-  padding: 20px;
-  border-radius: 20px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+.address-page__intro {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .checkout-card__header {
@@ -15,6 +15,15 @@
   justify-content: space-between;
   align-items: center;
   margin-bottom: 14px;
+  gap: 10px;
+}
+
+.address-form__step {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: #6fc4ff;
+  margin-bottom: 4px;
 }
 
 .form-grid {
@@ -27,27 +36,41 @@
   display: flex;
   flex-direction: column;
   gap: 6px;
-  color: #dce4ff;
+  color: #aac4f2;
   font-size: 0.95rem;
 }
 
 .form-grid input,
 .form-grid select {
   padding: 10px 12px;
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid rgba(0, 224, 255, 0.2);
   border-radius: 10px;
-  background: rgba(255, 255, 255, 0.14);
-  color: white;
+  background: rgba(6, 10, 24, 0.8);
+  color: #f3f7ff;
 }
 
 .form-grid input:focus,
 .form-grid select:focus {
-  outline: 2px solid #8fb9ff;
+  outline: 2px solid #7ee7ff;
   outline-offset: 2px;
+}
+
+.address-form__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 16px;
 }
 
 @media (max-width: 760px) {
   .form-grid {
     grid-template-columns: 1fr;
+  }
+
+  .address-form__footer,
+  .checkout-card__header {
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

@@ -1,34 +1,77 @@
+import { useState } from 'react'
 import './Payment.css'
 
-function Payment({
-  payment = { paymentMethod: '', cardName: '', cardNumber: '', expiry: '', cvc: '' },
-  onChange = () => {},
-  onSubmit = (event) => event.preventDefault(),
-  onBack = () => {},
-  address = { fullName: '' },
-  total = 0,
-  wishlist = [],
-}) {
+const defaultPayment = {
+  paymentMethod: '',
+  cardName: '',
+  cardNumber: '',
+  expiry: '',
+  cvc: '',
+  paypalEmail: '',
+  paypalPassword: '',
+}
+
+function Payment({ payment: providedPayment, onChange, onSubmit, onBack, address = { fullName: '' }, total = 0, wishlist = [] }) {
+  const [formPayment, setFormPayment] = useState(defaultPayment)
+  const isControlled = providedPayment !== undefined && typeof onChange === 'function'
+  const payment = isControlled ? providedPayment : formPayment
+
+  const effectiveTotal = total || 0
   const itemCount = wishlist.length || 0
 
+  let effectiveAddress = address
+  if (!effectiveAddress || !effectiveAddress.fullName) {
+    try {
+      const stored = localStorage.getItem('address')
+      if (stored) effectiveAddress = JSON.parse(stored)
+    } catch {
+      // ignore
+    }
+  }
+
+  const handleChange = (event) => {
+    if (isControlled) {
+      onChange(event)
+      return
+    }
+
+    const { name, value } = event.target
+    setFormPayment((currentPayment) => ({
+      ...currentPayment,
+      [name]: value,
+    }))
+  }
+
+  const handleSubmit = (event) => {
+    event.preventDefault()
+
+    if (onSubmit) {
+      onSubmit(event)
+      return
+    }
+  }
+
   return (
-    <form className="checkout-card" onSubmit={onSubmit}>
+    <form className="checkout-card address-form" onSubmit={handleSubmit}>
       <div className="checkout-card__header">
-        <h3>Payment</h3>
-        <button type="button" className="text-btn" onClick={onBack}>
+        <div>
+          <p className="address-form__step">Step 2 of 2</p>
+          <h3>Payment</h3>
+        </div>
+        <button type="button" className="text-btn" onClick={onBack ?? (() => {})}>
           Back
         </button>
       </div>
 
       <div className="payment-summary">
-        <p>Delivering to {address.fullName || 'your address'}</p>
-        <p>{itemCount} items • Total R{total.toFixed(2)}</p>
+        <p>Delivering to {effectiveAddress?.fullName || 'your address'}</p>
+        <p>{itemCount} items • Total R{effectiveTotal.toLocaleString()}</p>
       </div>
 
       <div className="form-grid">
         <label>
           Payment method
-          <select name="paymentMethod" value={payment.paymentMethod} onChange={onChange} required>
+          <select name="paymentMethod" value={payment.paymentMethod} onChange={handleChange} required>
             <option value="" disabled>
               Select a payment method
             </option>
@@ -40,22 +83,35 @@ function Payment({
 
         {payment.paymentMethod === 'Mastercard' && (
           <>
-        <label>
-          Cardholder name
-          <input name="cardName" value={payment.cardName} onChange={onChange} required />
-        </label>
-        <label>
-          Card number
-          <input name="cardNumber" value={payment.cardNumber} onChange={onChange} required />
-        </label>
-        <label>
-          Expiry date
-          <input name="expiry" value={payment.expiry} onChange={onChange} required />
-        </label>
-        <label>
-          CVC
-          <input name="cvc" value={payment.cvc} onChange={onChange} required />
-        </label>
+            <label>
+              Cardholder name
+              <input name="cardName" value={payment.cardName} onChange={handleChange} required />
+            </label>
+            <label>
+              Card number
+              <input name="cardNumber" value={payment.cardNumber} onChange={handleChange} required />
+            </label>
+            <label>
+              Expiry date
+              <input name="expiry" value={payment.expiry} onChange={handleChange} required />
+            </label>
+            <label>
+              CVC
+              <input name="cvc" value={payment.cvc} onChange={handleChange} required />
+            </label>
+          </>
+        )}
+
+        {payment.paymentMethod === 'PayPal' && (
+          <>
+            <label>
+              PayPal email
+              <input name="paypalEmail" value={payment.paypalEmail} onChange={handleChange} required />
+            </label>
+            <label>
+              PayPal password
+              <input name="paypalPassword" type="password" value={payment.paypalPassword} onChange={handleChange} required />
+            </label>
           </>
         )}
       </div>
@@ -67,4 +123,4 @@ function Payment({
   )
 }
 
-export default Payment;
+export default Payment

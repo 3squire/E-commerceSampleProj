@@ -1,59 +1,35 @@
-import { useMemo, useState } from 'react'
-import './App.css'
-import './dark-theme.css'
-import './product-images.css'
-import techyLogo from './assets/techy.jpeg'
-import laptopSheet from './assets/products/laptop-sheet.png'
-import desktopSheet from './assets/products/pc-sheet.png'
-import phoneSheet from './assets/products/phone-sheet.png'
-import tabletSheet from './assets/products/tablet-sheet.png'
-import cameraSheet from './assets/products/camera-sheet.png'
-import watchSheet from './assets/products/watch-sheet.png'
-import monitorSheet from './assets/products/monitor-sheet.png'
-import mouseSheet from './assets/products/mouse-sheet.png'
-import keyboardSheet from './assets/products/keyboard-sheet.png'
-import storageSheet from './assets/products/storage-sheet.png'
-import printerSheet from './assets/products/printer-sheet.png'
-import audioSheet from './assets/products/audio-sheet.png'
+import Wishlist from "./Wishlist.jsx";
 
-const categoryImages = {
-  Laptops: laptopSheet, PCs: desktopSheet, Cellphones: phoneSheet, 'iPads & Tablets': tabletSheet,
-  Cameras: cameraSheet, 'Smart Watches': watchSheet, Monitors: monitorSheet, Mouse: mouseSheet,
-  Keyboards: keyboardSheet, 'USB & Storage': storageSheet, Printers: printerSheet, Audio: audioSheet,
-}
-const sheetCategories = new Set([
-  'Laptops', 'PCs', 'Cellphones', 'iPads & Tablets', 'Cameras', 'Smart Watches',
-  'Monitors', 'Mouse', 'Keyboards', 'USB & Storage', 'Printers', 'Audio',
-])
-const cropPositions = ['0% 0%', '33.333% 0%', '66.667% 0%', '100% 0%', '0% 100%', '33.333% 100%', '66.667% 100%']
+function App() {
+  const [activeStep, setActiveStep] = useState('wishlist')
+  const [address, setAddress] = useState(defaultAddress)
+  const [payment, setPayment] = useState(defaultPayment)
 
-const data = [
-  ['Laptops','💻',['NerdyBook Pro 15','AeroLite 14','Creator X16','FlexBook 2-in-1','EdgeBook 13','Titan 17','StudyBook Go'],'Core i7 · 16GB RAM · 512GB SSD',13999],
-  ['PCs','🖥️',['Gaming Beast RTX','Vertex Core','Nova Tower','Studio Pro','Atlas Mini','Forge RTX','Orbit Desktop'],'Ryzen 7 · 32GB RAM · 1TB SSD',18499],
-  ['Cellphones','📱',['Galaxy Smart Phone','Nerdy One Pro','Luma 5G','Orbit Ultra','Pixel Next','Zen Phone 12','Spark Lite'],'6.7-inch OLED · 256GB · 5G',8999],
-  ['iPads & Tablets','📲',['NerdyTab Pro','Slate Air','iPad Plus','NoteTab 11','Canvas Pro','GoTab 10','Mini Slate'],'11-inch display · 128GB · Wi-Fi 6',7499],
-  ['Cameras','📷',['Creator Camera 4K','Vision X5','Frame Pro','Lumix Snap','Focus 4K','Trail Cam','Pocket Creator'],'24MP · 4K video · Wi-Fi',6199],
-  ['Smart Watches','⌚',['Smart Watch Pro','Pulse Watch 3','Active Loop','Nova Fit','Orbit Sport','HealthBand Pro','Time X'],'AMOLED · GPS · 7-day battery',1899],
-  ['Monitors','🖼️',['View 27Q','Curve 34','Studio 4K','Swift 24','UltraWide 29','GameView 32','DeskView 22'],'27-inch QHD · 165Hz · IPS',3299],
-  ['Mouse','🖱️',['Glide Pro','Arc Mouse','Swift Click','Ergo Lift','Nova Wireless','Pulse RGB','Travel Mini'],'Wireless · 8,000 DPI · USB-C',499],
-  ['Keyboards','⌨️',['Type Pro','NerdyKeys 75','Click Mini','Arc Mechanical','Glow RGB','Desk Keys','Travel Board'],'Mechanical · Hot-swap · USB-C',799],
-  ['USB & Storage','🔌',['Flash Drive 128','Pocket SSD 1TB','USB-C Hub','Nano Drive 64','Vault SSD 2TB','Charge Cable','MultiPort Hub'],'USB 3.2 · Fast transfer · Compact',249],
-  ['Printers','🖨️',['PrintFlow 400','Ink Pro 6','Laser Compact','Photo Studio','OfficeJet Max','Eco Tank','Print Mini'],'Wireless · Duplex · Mobile print',1699],
-  ['Audio','🎧',['Nerdy Audio Max','Buds Air','Studio Headphones','Boom Mini','Wave Speaker','Noise Pro','Pocket Beats'],'Bluetooth 5.3 · 30-hour battery · ANC',699],
-]
-const products = data.flatMap(([department,icon,names,specs,price], d) => names.map((name,i) => ({id:`${d}-${i}`,department,icon,image:categoryImages[department],isSheet:sheetCategories.has(department),crop:cropPositions[i],name,specs,price:price+i*(d<2?1000:160),rating:(4.5+((i+d)%5)/10).toFixed(1),description:`Premium ${department.toLowerCase()} built for work, play and everyday life.`,tag:i===0?'Best seller':i===3?'New':null})))
-const price = (value) => new Intl.NumberFormat('en-ZA',{style:'currency',currency:'ZAR',maximumFractionDigits:0}).format(value)
+  const handleAddressChange = (event) => {
+    const { name, value } = event.target
+    setAddress((currentAddress) => ({ ...currentAddress, [name]: value }))
+  }
 
-function App(){
- const [page,setPage]=useState('shop'),[department,setDepartment]=useState('All departments'),[term,setTerm]=useState(''),[search,setSearch]=useState(''),[cart,setCart]=useState([]),[saved,setSaved]=useState([]),[dark,setDark]=useState(false)
- const filtered=useMemo(()=>products.filter(p=>(department==='All departments'||p.department===department)&&(!search||`${p.name} ${p.department} ${p.specs}`.toLowerCase().includes(search.toLowerCase()))),[department,search])
- const add=(item,setter)=>setter(current=>current.some(p=>p.id===item.id)?current:[...current,item]); const remove=(id,setter)=>setter(current=>current.filter(p=>p.id!==id)); const shop=()=>{setPage('shop');window.scrollTo({top:0,behavior:'smooth'})}
- return <div className={`nerdy-app ${dark?'dark-mode':''}`}>
-  <header className="topbar"><button className="brand" onClick={shop}><img src={techyLogo} alt="NerdyTech logo" style={{width:32,height:32,objectFit:'cover',borderRadius:9,verticalAlign:'middle',marginRight:7}}/> NERDY<span>TECH</span></button><nav><button onClick={shop}>Shop</button><button onClick={()=>setPage('about')}>About</button><button onClick={()=>setPage('contact')}>Contact</button></nav><div className="header-tools"><button onClick={()=>setDark(!dark)}>{dark?'☀ Light':'◐ Dark'}</button><button onClick={()=>setPage('wishlist')}>♡ Wishlist <b>{saved.length}</b></button><button onClick={()=>setPage('cart')}>🛒 Cart <b>{cart.length}</b></button></div></header>
-  {page==='shop'&&<main><section className="hero-card"><div className="hero-copy"><p className="eyebrow">SMART TECH. REAL LIFE.</p><h1>Technology for the <em>next generation.</em></h1><p>Discover carefully selected devices for learning, creating, gaming and staying connected.</p><button className="primary-btn" onClick={()=>document.getElementById('products').scrollIntoView({behavior:'smooth'})}>Explore products →</button></div><div className="hero-card-side"><div className="orb"></div><span>💻</span><span>📱</span><p>GOOD TECH,<br/>THOUGHTFULLY CHOSEN.</p></div></section><section className="departments"><p>SHOP BY DEPARTMENT</p>{data.map(([name,icon])=><button key={name} onClick={()=>{setDepartment(name);shop()}}><span>{icon}</span>{name}</button>)}</section><section className="products-section" id="products"><div className="section-head"><div><p className="eyebrow">FIND YOUR NEXT FAVOURITE</p><h2>Explore our tech collection</h2></div><small>{filtered.length} products available</small></div><form className="search-area" onSubmit={e=>{e.preventDefault();setSearch(term)}}><label>⌕<input value={term} onChange={e=>setTerm(e.target.value)} placeholder="Search by product, feature or need..."/></label><select value={department} onChange={e=>setDepartment(e.target.value)}><option>All departments</option>{data.map(([name])=><option key={name}>{name}</option>)}</select><button className="primary-btn">Search</button></form><div className="chips">{department!=='All departments'&&<button onClick={()=>setDepartment('All departments')}>× {department}</button>}{search&&<button onClick={()=>{setSearch('');setTerm('')}}>× {search}</button>}</div><div className="products-grid">{filtered.map(p=><article className="tech-card" key={p.id}><div className="product-icon"><div className="product-photo" role="img" aria-label={`${p.name} ${p.department}`} style={{backgroundImage:`url(${p.image})`,backgroundSize:p.isSheet?'400% 200%':'cover',backgroundPosition:p.isSheet?p.crop:'center'}}></div>{p.tag&&<b>{p.tag}</b>}<button className={saved.some(x=>x.id===p.id)?'saved':''} onClick={()=>saved.some(x=>x.id===p.id)?remove(p.id,setSaved):add(p,setSaved)}>{saved.some(x=>x.id===p.id)?'♥':'♡'}</button></div><div className="card-copy"><p className="category">{p.department}</p><h3>{p.name}</h3><p className="description">{p.description}</p><p className="specs">{p.specs}</p><p className="rating">★ {p.rating} <span>(24 reviews)</span></p><div><strong>{price(p.price)}</strong><button className="add-btn" onClick={()=>add(p,setCart)}>{cart.some(x=>x.id===p.id)?'Added ✓':'Add to cart'}</button></div></div></article>)}</div>{!filtered.length&&<Empty title="No matches found" copy="Try another search or department." onClick={()=>{setSearch('');setTerm('');setDepartment('All departments')}} button="Clear filters"/>}</section></main>}
-  {page==='wishlist'&&<Collection title="Your wishlist" items={saved} remove={id=>remove(id,setSaved)} action={p=>{add(p,setCart);remove(p.id,setSaved)}} actionText="Move to cart" back={shop}/>} {page==='cart'&&<Collection title="Your cart" items={cart} remove={id=>remove(id,setCart)} back={shop} checkout/>} {page==='about'&&<Info title="About NerdyTech" intro="Technology should feel exciting, useful and made for real life." sections={[['Our story','NerdyTech is a technology shop built around carefully selected gear and human advice.'],['Why shop with us','Authentic products, secure payment, nationwide delivery and local support.'],['Our promise','We make choosing technology simpler, so you can enjoy it sooner.']]}/>} {page==='contact'&&<Info title="Let’s talk tech" intro="Need help choosing, ordering or setting up your gear? Our team is here." contact sections={[['Call us','+27 10 555 0148 · Monday–Friday, 08:00–17:00'],['Email us','hello@nerdytech.co.za · We reply within one business day.'],['Visit us','South Africa · Online shopping available nationwide.']]}/>} {page==='policies'&&<Info title="Store policies" intro="Straightforward terms for a confident purchase." sections={[['Delivery','Orders are dispatched within 1–2 business days. Delivery costs appear at checkout.'],['Returns','Return unused products in original packaging within 14 days of delivery.'],['Warranty','All products include manufacturer warranty. Keep your proof of purchase.'],['Privacy & payments','Your information is protected and payments are processed securely.']]}/>} 
-  <footer><div><button className="brand" onClick={shop}><img src={techyLogo} alt="NerdyTech logo" style={{width:32,height:32,objectFit:'cover',borderRadius:9,verticalAlign:'middle',marginRight:7}}/> NERDY<span>TECH</span></button><p>Good technology, thoughtfully chosen.</p></div><div><h4>SHOP</h4>{data.slice(0,5).map(([name])=><button key={name} onClick={()=>{setDepartment(name);shop()}}>{name}</button>)}</div><div><h4>HELP</h4><button onClick={()=>setPage('contact')}>Contact us</button><button onClick={()=>setPage('policies')}>Delivery & returns</button><button onClick={()=>setPage('policies')}>Warranty</button></div><div><h4>STAY IN THE LOOP</h4><p>New drops, useful tips, no noise.</p><label className="newsletter"><input placeholder="Your email address"/><button>→</button></label></div><section>© 2026 NerdyTech. All rights reserved.<span><button onClick={()=>setPage('policies')}>Privacy</button><button onClick={()=>setPage('policies')}>Terms</button><button onClick={()=>setPage('policies')}>Accessibility</button></span></section></footer>
- </div>
+  const handleAddressSubmit = (event) => {
+    event.preventDefault()
+    setActiveStep('payment')
+  }
+
+  const handlePaymentChange = (event) => {
+    const { name, value } = event.target
+    setPayment((currentPayment) => ({ ...currentPayment, [name]: value }))
+  }
+
+  const handlePaymentSubmit = (event) => {
+    event.preventDefault()
+    setActiveStep('complete')
+  }
+
+  return (
+    <div>
+      <Wishlist />
+    </div>
+  );
 }
 function Empty({title,copy,onClick,button}){return <div className="empty"><div>♡</div><h2>{title}</h2><p>{copy}</p><button className="primary-btn" onClick={onClick}>{button}</button></div>}
 function Collection({title,items,remove,action,actionText,back,checkout}){const total=items.reduce((s,p)=>s+p.price,0);return <main className="collection"><button className="back" onClick={back}>← Continue shopping</button><h1>{title}</h1>{items.length?<div className="collection-layout"><div>{items.map(p=><article className="line-item" key={p.id}><span>{p.icon}</span><div><p className="category">{p.department}</p><h3>{p.name}</h3><p>{p.specs}</p></div><strong>{price(p.price)}</strong><button className="remove" onClick={()=>remove(p.id)}>Remove</button>{action&&<button className="add-btn" onClick={()=>action(p)}>{actionText}</button>}</article>)}</div><aside><p>ORDER SUMMARY</p><div><span>Items ({items.length})</span><span>{price(total)}</span></div><div><span>Delivery</span><span>At checkout</span></div><hr/><strong>Total <span>{price(total)}</span></strong><button className="primary-btn" onClick={()=>checkout&&alert('Checkout is ready to connect to your payment provider.')}>{checkout?'Checkout':'Keep shopping'}</button></aside></div>:<Empty title={title==='Your cart'?'Your cart is empty':'Your wishlist is waiting'} copy="Explore our collection and save the tech you love." onClick={back} button="Browse products"/>}</main>}
