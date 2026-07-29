@@ -39,39 +39,53 @@ background:white;
 display:flex;
 flex-direction:column;
 justify-content:center;
+align-items:center;
 padding:60px;
 }
 
-.right h2{
-font-size:35px;
-margin-bottom:10px;
-}
-
-.right p{
-margin-bottom:20px;
-color:gray;
-}
-
-form{
+/* Single centered card so the whole block sits together in the white panel */
+.login-card{
+width:100%;
+max-width:380px;
 display:flex;
 flex-direction:column;
 }
 
-input{
+.login-card h2{
+font-size:34px;
+margin-bottom:8px;
+text-align:center;
+color:#0d1b2a;
+}
+
+.login-card > p{
+margin-bottom:32px;
+color:gray;
+text-align:center;
+}
+
+.right form{
+display:flex;
+flex-direction:column;
+}
+
+.right input{
 padding:15px;
-margin-bottom:15px;
+margin-bottom:16px;
 font-size:16px;
 border:1px solid #ddd;
 border-radius:8px;
 }
 
-form a{
+.right form a{
 text-decoration:none;
 margin-bottom:20px;
 color:#1976d2;
+font-size:14px;
+align-self:flex-end;
 }
 
-button{
+.right button{
 padding:15px;
 border:none;
 border-radius:8px;
@@ -81,11 +95,11 @@ margin-bottom:15px;
 transition:0.3s;
 }
 
-button:hover{
+.right button:hover{
 opacity:.9;
 }
 
-form button{
+.right form button{
 background:#1976d2;
 color:white;
 }

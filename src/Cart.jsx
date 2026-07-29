@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Cart.css'
 
-const starterCart = [
+export const starterCart = [
   {
     id: 1,
     name: 'Aurora Headphones',
@@ -18,8 +18,11 @@ const starterCart = [
   },
 ]
 
-function Cart({ onCheckout, onContinueShopping }) {
-  const [cart, setCart] = useState(starterCart)
+function Cart({ cart: providedCart, setCart: providedSetCart, onCheckout, onContinueShopping }) {
+  const [localCart, setLocalCart] = useState(starterCart)
+  const isControlled = providedCart !== undefined && typeof providedSetCart === 'function'
+  const cart = isControlled ? providedCart : localCart
+  const setCart = isControlled ? providedSetCart : setLocalCart
 
   const increase = (id) => {
     setCart((currentCart) =>

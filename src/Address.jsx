@@ -13,7 +13,7 @@ const southAfricanProvinces = [
   'Western Cape',
 ]
 
-const defaultAddress = {
+export const defaultAddress = {
   fullName: '',
   addressLine: '',
   city: '',

@@ -1,0 +1,38 @@
+.order-confirmation {
+  display: flex;
+  justify-content: center;
+}
+
+.order-confirmation__card {
+  max-width: 440px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.order-confirmation__check {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: #1f9d55;
+  color: #fff;
+  font-size: 34px;
+  line-height: 64px;
+  display: block;
+}
+
+.order-confirmation__card h2 {
+  margin: 0;
+}
+
+.order-confirmation__card p {
+  color: #aac4f2;
+  margin: 0;
+}
+
+.order-confirmation__card .primary-btn {
+  margin-top: 8px;
+}

@@ -24,6 +24,7 @@ function Login() {
       </div>
 
       <div className="right">
+        <div className="login-card">
         <h2>Welcome Back</h2>
         <p>Login to continue shopping.</p>
 
@@ -67,6 +68,7 @@ function Login() {
             Register
           </Link>
         </p>
+        </div>
       </div>
     </div>
   );

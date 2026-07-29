@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Payment.css'
 
-const defaultPayment = {
+export const defaultPayment = {
   paymentMethod: '',
   cardName: '',
   cardNumber: '',
@@ -11,13 +11,13 @@ const defaultPayment = {
   paypalPassword: '',
 }
 
-function Payment({ payment: providedPayment, onChange, onSubmit, onBack, address = { fullName: '' }, total = 0, wishlist = [] }) {
+function Payment({ payment: providedPayment, onChange, onSubmit, onBack, address = { fullName: '' }, total = 0, itemCount = 0 }) {
   const [formPayment, setFormPayment] = useState(defaultPayment)
   const isControlled = providedPayment !== undefined && typeof onChange === 'function'
   const payment = isControlled ? providedPayment : formPayment
 
   const effectiveTotal = total || 0
-  const itemCount = wishlist.length || 0
+  const effectiveItemCount = itemCount || 0
 
   let effectiveAddress = address
   if (!effectiveAddress || !effectiveAddress.fullName) {
@@ -65,7 +65,7 @@ function Payment({ payment: providedPayment, onChange, onSubmit, onBack, address
 
       <div className="payment-summary">
         <p>Delivering to {effectiveAddress?.fullName || 'your address'}</p>
-        <p>{itemCount} items • Total R{effectiveTotal.toLocaleString()}</p>
+        <p>{effectiveItemCount} cart {effectiveItemCount === 1 ? 'item' : 'items'} • Total R{effectiveTotal.toLocaleString()}</p>
       </div>
 
       <div className="form-grid">

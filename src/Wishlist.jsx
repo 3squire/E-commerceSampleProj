@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './Wishlist.css'
 
-const starterWishlist = [
+export const starterWishlist = [
   {
     id: 1,
     name: 'Aurora Headphones',
@@ -18,8 +18,11 @@ const starterWishlist = [
   },
 ]
 
-function Wishlist({ onContinue }) {
-  const [wishlist, setWishlist] = useState(starterWishlist)
+function Wishlist({ wishlist: providedWishlist, setWishlist: providedSetWishlist, onContinue }) {
+  const [localWishlist, setLocalWishlist] = useState(starterWishlist)
+  const isControlled = providedWishlist !== undefined && typeof providedSetWishlist === 'function'
+  const wishlist = isControlled ? providedWishlist : localWishlist
+  const setWishlist = isControlled ? providedSetWishlist : setLocalWishlist
   const [cartCount, setCartCount] = useState(0)
 
   const total = wishlist.reduce((sum, item) => sum + item.price, 0)
