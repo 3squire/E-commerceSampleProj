@@ -1,247 +1,102 @@
 import { useState } from 'react'
-import techyImage from './assets/techy.jpeg'
-import Address from './Address.jsx'
-import Payment from './Payment.jsx'
 import './Wishlist.css'
 
-const featuredItems = [
+const starterWishlist = [
   {
     id: 1,
-    name: 'Aurora Lamp',
-    tag: 'Lighting',
-    price: 'R89',
-    blurb: 'A soft-glow desk lamp with a calming ambient mode.',
+    name: 'Aurora Headphones',
+    brand: 'NerdyTech',
+    description: 'Immersive sound with adaptive noise control and a 40-hour battery life.',
+    price: 2499,
   },
   {
     id: 2,
-    name: 'Nova Headphones',
-    tag: 'Audio',
-    price: 'R179',
-    blurb: 'Immersive sound with noise reduction for focused work.',
-  },
-  {
-    id: 3,
-    name: 'Orbit Mouse',
-    tag: 'Peripherals',
-    price: 'R59',
-    blurb: 'An ergonomic gadget designed for comfort all day long.',
+    name: 'Nova Smart Watch',
+    brand: 'NerdyTech',
+    description: 'Track workouts, sleep, and notifications in one polished companion.',
+    price: 1899,
   },
 ]
 
-function Wishlist() {
-  const [wishlist, setWishlist] = useState([])
-  const [step, setStep] = useState('wishlist')
-  const [address, setAddress] = useState({
-    fullName: '',
-    addressLine: '',
-    city: '',
-    state: '',
-    postalCode: '',
-    phone: '',
-  })
-  const [payment, setPayment] = useState({
-    paymentMethod: '',
-    cardName: '',
-    cardNumber: '',
-    expiry: '',
-    cvc: '',
-  })
-  const [orderComplete, setOrderComplete] = useState(false)
+function Wishlist({ onContinue }) {
+  const [wishlist, setWishlist] = useState(starterWishlist)
+  const [cartCount, setCartCount] = useState(0)
 
-  const handleSave = (item) => {
-    setWishlist((current) => {
-      if (current.some((savedItem) => savedItem.id === item.id)) {
-        return current
-      }
+  const total = wishlist.reduce((sum, item) => sum + item.price, 0)
 
-      return [...current, item]
-    })
+  const removeWishlist = (id) => {
+    setWishlist((currentWishlist) => currentWishlist.filter((item) => item.id !== id))
   }
 
-  const handleAddressChange = (event) => {
-    const { name, value } = event.target
-    setAddress((current) => ({ ...current, [name]: value }))
-  }
+  const moveAllToCart = () => {
+    if (wishlist.length === 0) return
 
-  const handlePaymentChange = (event) => {
-    const { name, value } = event.target
-    setPayment((current) => ({ ...current, [name]: value }))
+    setCartCount((count) => count + wishlist.length)
+    setWishlist([])
   }
-
-  const handleAddressSubmit = (event) => {
-    event.preventDefault()
-    setStep('payment')
-  }
-
-  const handlePaymentSubmit = (event) => {
-    event.preventDefault()
-    setOrderComplete(true)
-    setStep('complete')
-  }
-
-  const total = wishlist.reduce((sum, item) => sum + Number(item.price.replace('R', '')), 0)
 
   return (
-    <div className="app-shell">
-      <header className="topbar">
-        <div className="brand-block">
-          <img src={techyImage} alt="Techy icon" className="brand-icon" />
-          <div>
-            <p className="eyebrow">NerdyTech</p>
-            <h1>Curate your next favorite gadget</h1>
-          </div>
-        </div>
+    <section className="wishlist-page">
+      <div className="wishlist-header">
         <div>
-          <a
-            className="wishlist-btn"
-            href="#"
-            onClick={(event) => {
-              event.preventDefault()
-              if (wishlist.length > 0) {
-                setStep('cart')
-              }
-            }}
-          >
-            Cart
-          </a>
-          <a className="wishlist-btn" href="/">
-            Back to home
-          </a>
+          <p className="eyebrow">Saved for later</p>
+          <h2>Your wishlist</h2>
+          <p>Keep track of the gear you want to come back to.</p>
         </div>
-      </header>
+        <span className="wishlist-count">{wishlist.length} saved</span>
+      </div>
 
-      <main className="wishlist-view">
-        {step === 'wishlist' && (
-          <>
-            <div className="view-header">
-              <h2>Your wishlist</h2>
-              <span className="pill">{wishlist.length} selected</span>
-            </div>
-
-            <section className="product-grid">
-              {featuredItems.map((item) => (
-                <article className="product-card" key={item.id}>
-                  <div className="product-card__top">
-                    <span className="pill">{item.tag}</span>
-                    <button
-                      className="heart-btn"
-                      onClick={() => handleSave(item)}
-                      aria-label={`Save R{item.name} to wishlist`}
-                    >
-                      ♡
-                    </button>
-                  </div>
-                  <h3>{item.name}</h3>
-                  <p>{item.blurb}</p>
-                  <div className="product-card__footer">
-                    <span>{item.price}</span>
-                    <button className="text-btn" onClick={() => handleSave(item)}>
-                      Add
-                    </button>
-                  </div>
-                </article>
-              ))}
-            </section>
-
-            {wishlist.length === 0 ? (
-              <div className="empty-state">
-                <h3>No saved items yet</h3>
-                <p>Select an item above and it will appear here.</p>
-              </div>
-            ) : (
-              <>
-                <ul className="wishlist-list">
-                  {wishlist.map((item) => (
-                    <li className="wishlist-item" key={item.id}>
-                      <div>
-                        <h3>{item.name}</h3>
-                        <p>{item.blurb}</p>
-                      </div>
-                      <span>{item.price}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <div className="checkout-actions">
-                  <div className="summary-box">
-                    <p>Total due</p>
-                    <strong>R{total.toFixed(2)}</strong>
-                  </div>
-                  <button className="primary-btn" onClick={() => setStep('cart')}>
-                    Go to cart
-                  </button>
+      {wishlist.length === 0 ? (
+        <div className="wishlist-empty">
+          <h3>No saved items yet</h3>
+          <p>Your favourites will appear here once you add them.</p>
+        </div>
+      ) : (
+        <>
+          <div className="wishlist-list">
+            {wishlist.map((item) => (
+              <article className="wish-card" key={item.id}>
+                <div className="wish-thumb" aria-hidden="true">
+                  {item.name.slice(0, 2).toUpperCase()}
                 </div>
-              </>
-            )}
-          </>
-        )}
+                <div className="wish-card-info">
+                  <p className="product-brand">{item.brand}</p>
+                  <h3>{item.name}</h3>
+                  <p>{item.description}</p>
+                </div>
+                <strong className="wish-card-price">R{item.price.toLocaleString()}</strong>
+                <button
+                  className="remove-wish-button"
+                  onClick={() => removeWishlist(item.id)}
+                  aria-label={`Remove ${item.name} from wishlist`}
+                >
+                  ✕
+                </button>
+              </article>
+            ))}
+          </div>
 
-        {step === 'cart' && (
-          <div className="checkout-card">
-            <div className="checkout-card__header">
-              <h3>Cart</h3>
-              <button type="button" className="text-btn" onClick={() => setStep('wishlist')}>
-                Back
-              </button>
+          <div className="wishlist-summary">
+            <div>
+              <span>Total for selected items:</span>
+              <strong> R{total.toLocaleString()}</strong>
             </div>
-
-            <p>Your selected items are ready for checkout.</p>
-            <ul className="wishlist-list">
-              {wishlist.map((item) => (
-                <li className="wishlist-item" key={item.id}>
-                  <div>
-                    <h3>{item.name}</h3>
-                    <p>{item.blurb}</p>
-                  </div>
-                  <span>{item.price}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="checkout-actions">
-              <div className="summary-box">
-                <p>Total due</p>
-                <strong>R{total.toFixed(2)}</strong>
-              </div>
-              <button className="primary-btn" onClick={() => setStep('address')}>
-                Continue to address
+            <div className="wishlist-actions">
+              <button className="add-cart-button" onClick={moveAllToCart}>
+                Add selected to cart
               </button>
+              {onContinue ? (
+                <button className="primary-btn" onClick={onContinue}>
+                  Continue to checkout
+                </button>
+              ) : null}
             </div>
           </div>
-        )}
+        </>
+      )}
 
-        {step === 'address' && (
-          <Address
-            address={address}
-            onChange={handleAddressChange}
-            onSubmit={handleAddressSubmit}
-            onBack={() => setStep('cart')}
-          />
-        )}
-
-        {step === 'payment' && (
-          <Payment
-            payment={payment}
-            onChange={handlePaymentChange}
-            onSubmit={handlePaymentSubmit}
-            onBack={() => setStep('address')}
-            address={address}
-            total={total}
-            wishlist={wishlist}
-          />
-        )}
-
-        {step === 'complete' && (
-          <div className="complete-state">
-            <h3>Payment confirmed</h3>
-            <p>Your order has been placed and will be delivered to {address.fullName}.</p>
-            <button className="primary-btn" onClick={() => setStep('wishlist')}>
-              Back to wishlist
-            </button>
-          </div>
-        )}
-      </main>
-    </div>
+      <p className="cart-hint">Cart items moved: {cartCount}</p>
+    </section>
   )
 }
 
