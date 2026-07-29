@@ -1,0 +1,54 @@
+.nerdy-app.dark-mode {
+  background: #02030a;
+  color: #f4f7ff;
+}
+
+.nerdy-app.dark-mode .topbar {
+  background: rgba(2, 3, 10, 0.94);
+  border-color: rgba(143, 185, 255, 0.2);
+}
+
+.nerdy-app.dark-mode .hero-card {
+  background: linear-gradient(120deg, #02030a 0%, #0c1230 58%, #171038 100%);
+}
+
+.nerdy-app.dark-mode .hero-card-side {
+  background: linear-gradient(135deg, #182052, #542f91);
+}
+
+.nerdy-app.dark-mode .products-section,
+.nerdy-app.dark-mode .collection,
+.nerdy-app.dark-mode .info {
+  background: #02030a;
+}
+
+.nerdy-app.dark-mode .departments,
+.nerdy-app.dark-mode .tech-card,
+.nerdy-app.dark-mode .search-area,
+.nerdy-app.dark-mode .collection aside,
+.nerdy-app.dark-mode .info section {
+  background: #0b0f22;
+  border-color: rgba(143, 185, 255, 0.18);
+}
+
+.nerdy-app.dark-mode .product-icon {
+  background: #111936;
+}
+
+.nerdy-app.dark-mode .search-area label,
+.nerdy-app.dark-mode .search-area select,
+.nerdy-app.dark-mode .contact-form input,
+.nerdy-app.dark-mode .contact-form textarea {
+  background: #050813;
+  border-color: rgba(143, 185, 255, 0.27);
+}
+
+.nerdy-app.dark-mode .header-tools button,
+.nerdy-app.dark-mode .chips button,
+.nerdy-app.dark-mode .add-btn {
+  border-color: rgba(143, 185, 255, 0.38);
+}
+
+.nerdy-app.dark-mode footer {
+  background: #010208;
+}

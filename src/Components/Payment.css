@@ -1,0 +1,24 @@
+.payment-summary {
+  margin-bottom: 14px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  color: #dce4ff;
+}
+
+.payment-summary p {
+  margin-bottom: 4px;
+}
+
+.form-grid select {
+  padding: 10px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.14);
+  color: white;
+}
+
+.form-grid select:focus {
+  outline: 2px solid #8fb9ff;
+  outline-offset: 2px;
+}
