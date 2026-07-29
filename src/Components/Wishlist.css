@@ -1,0 +1,252 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Roboto, sans-serif;
+  background: linear-gradient(135deg, #090b16 0%, #1a2247 100%);
+  color: #f5f7ff;
+}
+
+button {
+  font: inherit;
+  cursor: pointer;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+.app-shell {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 32px 20px 48px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.brand-block {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.brand-icon {
+  width: 64px;
+  height: 64px;
+  object-fit: cover;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.2);
+}
+
+.eyebrow {
+  margin: 0 0 6px;
+  font-size: 0.8rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: #8fb9ff;
+}
+
+h1,
+h2,
+h3,
+p {
+  margin: 0;
+}
+
+h1 {
+  font-size: 2rem;
+  color: #6b9aff;
+}
+
+h2 {
+  color: #6b9aff;
+}
+
+.wishlist-btn,
+.primary-btn,
+.text-btn,
+.heart-btn {
+  border: none;
+  border-radius: 999px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.wishlist-btn:hover,
+.primary-btn:hover,
+.text-btn:hover,
+.heart-btn:hover {
+  transform: translateY(-1px);
+}
+
+.wishlist-btn {
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.hero-card {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: 2fr 1fr;
+  padding: 24px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.2);
+}
+
+.hero-copy h2 {
+  font-size: 2rem;
+  margin-bottom: 10px;
+}
+
+.hero-copy p {
+  color: #d9e2ff;
+  max-width: 560px;
+}
+
+.hero-card-side {
+  padding: 18px;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #6a5cff, #8f6bff);
+}
+
+.hero-badge {
+  display: inline-block;
+  padding: 6px 10px;
+  margin-bottom: 10px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.25);
+  font-size: 0.78rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+}
+
+.primary-btn {
+  margin-top: 14px;
+  padding: 10px 14px;
+  background: #fff;
+  color: #1b2350;
+}
+
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 20px;
+}
+
+.home-view {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.product-card {
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.product-card__top,
+.product-card__footer,
+.view-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.pill {
+  display: inline-block;
+  padding: 5px 8px;
+  border-radius: 999px;
+  background: rgba(143, 185, 255, 0.2);
+  font-size: 0.8rem;
+  color: #c7d7ff;
+}
+
+.heart-btn {
+  width: 38px;
+  height: 38px;
+  background: #ffffff;
+  color: #ff4d74;
+  font-size: 1.1rem;
+}
+
+.product-card h3,
+.wishlist-item h3 {
+  margin: 12px 0 6px;
+}
+
+.product-card p,
+.wishlist-item p,
+.empty-state p {
+  color: #dce4ff;
+  line-height: 1.5;
+}
+
+.text-btn {
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+}
+
+.wishlist-view {
+  padding: 20px;
+  border-radius: 24px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(16px);
+}
+
+.wishlist-list {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0;
+  display: grid;
+  gap: 12px;
+}
+
+.wishlist-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.empty-state {
+  padding: 24px;
+  margin-top: 16px;
+  border-radius: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  text-align: center;
+}
+
+@media (max-width: 760px) {
+  .topbar,
+  .hero-card,
+  .wishlist-item {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .hero-card {
+    grid-template-columns: 1fr;
+  }
+
+  .view-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
