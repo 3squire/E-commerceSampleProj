@@ -1,0 +1,99 @@
+:root[data-theme='light'] {
+  background: linear-gradient(135deg, #eff7ff 0%, #f9fbff 48%, #f5efff 100%);
+  color: #142342;
+}
+
+.app-shell.light-mode {
+  color: #142342;
+}
+
+.light-mode .topbar,
+.light-mode .products-container,
+.light-mode .cart-page,
+.light-mode .wishlist-page,
+.light-mode .address-page,
+.light-mode .checkout-card,
+.light-mode .wishlist-empty,
+.light-mode .empty-state,
+.light-mode .order-confirmation,
+.light-mode .home-page,
+.light-mode .category-card,
+.light-mode .tech-card,
+.light-mode .cart-item,
+.light-mode .wish-card,
+.light-mode .cart-summary,
+.light-mode .wishlist-summary,
+.light-mode .products-search {
+  background: rgba(255, 255, 255, 0.9);
+  color: #142342;
+  border-color: rgba(36, 104, 180, 0.22);
+  box-shadow: 0 12px 26px rgba(38, 77, 136, 0.12);
+}
+
+.light-mode .brand,
+.light-mode .nav-links a,
+.light-mode h1,
+.light-mode h2,
+.light-mode h3,
+.light-mode strong,
+.light-mode .products-description,
+.light-mode .tech-card__desc,
+.light-mode .cart-item-details,
+.light-mode .wish-card-info,
+.light-mode .payment-summary,
+.light-mode .address-form,
+.light-mode label {
+  color: #142342;
+}
+
+.light-mode .brand span,
+.light-mode .tech-card__desc,
+.light-mode .products-description,
+.light-mode .products-filter-status,
+.light-mode .products-empty,
+.light-mode .cart-item-price,
+.light-mode .wish-card-info p,
+.light-mode .payment-summary p {
+  color: #4c6385;
+}
+
+.light-mode input,
+.light-mode select,
+.light-mode textarea,
+.light-mode .products-search input,
+.light-mode .products-search select {
+  background: #fff;
+  color: #142342;
+  border-color: rgba(36, 104, 180, 0.32);
+}
+
+.light-mode .ghost-btn,
+.light-mode .text-btn,
+.light-mode .products-reset,
+.light-mode .tech-card .ghost-btn {
+  color: #174d91;
+  border-color: rgba(23, 77, 145, 0.35);
+  background: rgba(239, 247, 255, 0.75);
+}
+
+.theme-toggle {
+  border: 1px solid rgba(111, 196, 255, 0.42);
+  border-radius: 999px;
+  padding: 8px 12px;
+  background: rgba(111, 196, 255, 0.12);
+  color: #dfefff;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.light-mode .theme-toggle {
+  background: #eef7ff;
+  color: #174d91;
+  border-color: rgba(23, 77, 145, 0.28);
+}
+
+@media (max-width: 760px) {
+  .theme-toggle {
+    width: 100%;
+  }
+}

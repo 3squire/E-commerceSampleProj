@@ -1,6 +1,7 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Navigate, NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import './App.css'
+import './theme.css'
 import logo from './assets/nerdytech.jpeg'
 import Address, { defaultAddress } from './Address.jsx'
 import Cart, { starterCart } from './Cart.jsx'
@@ -22,6 +23,12 @@ function App() {
   const [payment, setPayment] = useState(defaultPayment)
   const [cart, setCart] = useState(starterCart)
   const [wishlist, setWishlist] = useState(starterWishlist)
+  const [theme, setTheme] = useState(() => localStorage.getItem('nerdytech-theme') || 'dark')
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    localStorage.setItem('nerdytech-theme', theme)
+  }, [theme])
 
   const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const wishlistTotal = wishlist.reduce((sum, item) => sum + item.price, 0)
@@ -63,7 +70,7 @@ function App() {
   }
 
   return (
-    <div className="app-shell">
+    <div className={`app-shell ${theme === 'light' ? 'light-mode' : 'dark-mode'}`}>
       {!hideNav && (
       <header className="topbar">
         <NavLink to="/home" className="brand">
@@ -80,6 +87,14 @@ function App() {
           <NavLink to="/cart">Cart</NavLink>
           <NavLink to="/wishlist">Wishlist</NavLink>
           <NavLink to="/">Login</NavLink>
+          <button
+            type="button"
+            className="theme-toggle"
+            onClick={() => setTheme((current) => current === 'dark' ? 'light' : 'dark')}
+            aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
+          >
+            {theme === 'dark' ? '☀ Light mode' : '◐ Dark mode'}
+          </button>
         </nav>
       </header>
       )}

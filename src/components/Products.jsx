@@ -1,16 +1,20 @@
 import { useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import './Products.css'
-import { products } from '../catalog.js'
+import { departments, products } from '../catalog.js'
 
 function Products({ addToCart, addToWishlist }) {
-  const [searchParams] = useSearchParams()
+  const [searchParams, setSearchParams] = useSearchParams()
   const department = searchParams.get('department')
+  const [searchTerm, setSearchTerm] = useState('')
+  const [submittedSearch, setSubmittedSearch] = useState('')
 
-  // Show only the selected department's products, or everything when no filter.
-  const visibleProducts = department
-    ? products.filter((product) => product.department === department)
-    : products
+  const visibleProducts = products.filter((product) => {
+    const matchesDepartment = !department || product.department === department
+    const searchableText = `${product.name} ${product.brand} ${product.department} ${product.description}`.toLowerCase()
+    const matchesSearch = !submittedSearch || searchableText.includes(submittedSearch.toLowerCase())
+    return matchesDepartment && matchesSearch
+  })
 
   // Tracks the most recent action per product id so we can show a brief note.
   const [notes, setNotes] = useState({})
@@ -29,8 +33,50 @@ function Products({ addToCart, addToWishlist }) {
     flashNote(product.id, added === false ? 'Already saved' : 'Added to wishlist ✓')
   }
 
+  const handleSearch = (event) => {
+    event.preventDefault()
+    setSubmittedSearch(searchTerm.trim())
+  }
+
+  const handleDepartmentChange = (event) => {
+    const nextDepartment = event.target.value
+    setSearchParams(nextDepartment ? { department: nextDepartment } : {})
+  }
+
+  const clearFilters = () => {
+    setSearchTerm('')
+    setSubmittedSearch('')
+    setSearchParams({})
+  }
+
   return (
     <div className="products-container">
+      <form className="products-search" onSubmit={handleSearch} role="search">
+        <label className="products-search__field">
+          <span>Search products</span>
+          <input
+            type="search"
+            value={searchTerm}
+            onChange={(event) => setSearchTerm(event.target.value)}
+            placeholder="Search laptops, cameras, specs..."
+          />
+        </label>
+        <label className="products-search__department">
+          <span>Shop by department</span>
+          <select value={department || ''} onChange={handleDepartmentChange}>
+            <option value="">All departments</option>
+            {departments.map((item) => (
+              <option key={item.name} value={item.name}>
+                {item.name}
+              </option>
+            ))}
+          </select>
+        </label>
+        <button className="primary-btn products-search__button" type="submit">
+          Search
+        </button>
+      </form>
+
       <div className="products-header">
         <div>
           <p className="eyebrow">Shop</p>
@@ -48,10 +94,21 @@ function Products({ addToCart, addToWishlist }) {
         ) : null}
       </div>
 
+      {(department || submittedSearch) && (
+        <div className="products-filter-status">
+          <span>
+            Showing {visibleProducts.length} product{visibleProducts.length === 1 ? '' : 's'}
+            {department ? ` in ${department}` : ''}
+            {submittedSearch ? ` for “${submittedSearch}”` : ''}
+          </span>
+          <button type="button" onClick={clearFilters}>Clear filters</button>
+        </div>
+      )}
+
       {visibleProducts.length === 0 ? (
         <p className="products-empty">
-          No products in this department yet.{' '}
-          <Link to="/products">View all products</Link>
+          No products match your search.{' '}
+          <button type="button" className="products-empty__link" onClick={clearFilters}>View all products</button>
         </p>
       ) : (
         <div className="products-grid">
