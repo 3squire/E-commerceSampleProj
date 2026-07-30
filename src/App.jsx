@@ -14,6 +14,8 @@ import Register from './components/Register.jsx'
 import ForgotPassword from './components/ForgotPassword.jsx'
 import Products from './components/Products.jsx'
 import ProductDetails from './components/ProductDetails.jsx'
+import Policy from "./components/Policy";
+import Contact from "./components/Contact";
 
 function App() {
   const navigate = useNavigate()
@@ -86,6 +88,8 @@ function App() {
           <NavLink to="/products">Products</NavLink>
           <NavLink to="/cart">Cart</NavLink>
           <NavLink to="/wishlist">Wishlist</NavLink>
+          <NavLink to="/contact">Contact</NavLink>
+          <NavLink to="/policy">Policy</NavLink>
           <NavLink to="/">Login</NavLink>
           <button
             type="button"
@@ -101,6 +105,8 @@ function App() {
 
       <main className="page-shell">
         <Routes>
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/policy" element={<Policy />} />
           <Route path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
