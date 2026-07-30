@@ -1,0 +1,156 @@
+.products-container {
+  padding: 20px;
+  border-radius: 22px;
+  background: rgba(8, 13, 29, 0.84);
+  border: 1px solid rgba(0, 224, 255, 0.22);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.25);
+  color: #fff;
+}
+
+.products-container .eyebrow {
+  color: #6fc4ff;
+  font-size: 0.82rem;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  margin-bottom: 6px;
+}
+
+.products-container h2 {
+  margin: 0 0 6px;
+  font-size: 1.8rem;
+}
+
+.products-description {
+  color: #aac4f2;
+  margin: 0 0 24px;
+}
+
+.products-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.products-reset {
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+  color: #fff;
+  background: transparent;
+  transition: background 0.2s ease;
+}
+
+.products-reset:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.products-empty {
+  color: #aac4f2;
+}
+
+.products-empty a {
+  color: #6fc4ff;
+}
+
+.products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.tech-card {
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.tech-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(0, 224, 255, 0.4);
+}
+
+.tech-card__img {
+  width: 100%;
+  height: 170px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 14px;
+  background: #fff;
+}
+
+.tech-card .product-brand {
+  color: #6fc4ff;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  margin: 0 0 4px;
+}
+
+.tech-card h3 {
+  margin: 0 0 8px;
+  font-size: 1.15rem;
+}
+
+.tech-card__desc {
+  color: #dce4ff;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  margin: 0 0 12px;
+  flex-grow: 1;
+}
+
+.tech-card strong {
+  font-size: 1.25rem;
+  margin-bottom: 14px;
+}
+
+.tech-card__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.tech-card .primary-btn {
+  padding: 10px 14px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  background: #fff;
+  color: #1b2350;
+  transition: opacity 0.2s ease;
+}
+
+.tech-card .ghost-btn {
+  padding: 10px 14px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 0.95rem;
+  background: transparent;
+  color: #fff;
+  transition: background 0.2s ease;
+}
+
+.tech-card .primary-btn:hover {
+  opacity: 0.9;
+}
+
+.tech-card .ghost-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+.tech-card__note {
+  margin: 10px 0 0;
+  font-size: 0.85rem;
+  color: #7ee0a8;
+  text-align: center;
+}

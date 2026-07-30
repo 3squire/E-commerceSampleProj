@@ -111,9 +111,12 @@ cursor:pointer;
 }
 
 .footer-logo{
-    width:70px;
-    height:70px;
-    border-radius:50%;
+    width:56px;
+    height:56px;
+    border-radius:16px;
+    object-fit:cover;
+    background:white;
+    padding:4px;
     margin-bottom:15px;
 }
 
@@ -136,11 +139,6 @@ cursor:pointer;
     color: white;
     font-size: 30px;
     font-weight: bold;
-}
-
-.footer-logo {
-    width: 70px;
-    margin-bottom: 15px;
 }
 
 .categories{

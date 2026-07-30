@@ -42,6 +42,11 @@
   width: 64px;
   height: 64px;
   border-radius: 16px;
+  object-fit: cover;
+  background: #fff;
+}
+
+.cart-thumb--fallback {
   display: grid;
   place-items: center;
   background: linear-gradient(135deg, #00e0ff, #7b61ff 60%, #ff2d95);
@@ -111,6 +116,42 @@
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+/* Shared button styles for the cart/checkout pages */
+.primary-btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: #06122c;
+  background: linear-gradient(135deg, #00e0ff, #7b61ff 60%, #ff2d95);
+  box-shadow: 0 8px 20px rgba(0, 224, 255, 0.25);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, opacity 0.15s ease;
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 10px 24px rgba(123, 97, 255, 0.35);
+}
+
+.text-btn {
+  padding: 12px 18px;
+  border: 1px solid rgba(0, 224, 255, 0.35);
+  border-radius: 999px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  color: #dfefff;
+  background: rgba(255, 255, 255, 0.06);
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.text-btn:hover {
+  background: rgba(255, 255, 255, 0.12);
+  border-color: rgba(0, 224, 255, 0.6);
 }
 
 @media (max-width: 760px) {

@@ -1,128 +1,84 @@
+import { useState } from 'react'
+import { Link, useSearchParams } from 'react-router-dom'
 import './Products.css'
+import { products } from '../catalog.js'
 
-const products = [
-  {
-    id:1,
-    name:'NerdyBook Pro 15',
-    category:'Laptops',
-    price:'R18 999',
-    icon:'💻'
-  },
+function Products({ addToCart, addToWishlist }) {
+  const [searchParams] = useSearchParams()
+  const department = searchParams.get('department')
 
-  {
-    id:2,
-    name:'Galaxy Smart Phone',
-    category:'Smartphones',
-    price:'R12 999',
-    icon:'📱'
-  },
+  // Show only the selected department's products, or everything when no filter.
+  const visibleProducts = department
+    ? products.filter((product) => product.department === department)
+    : products
 
-  {
-    id:3,
-    name:'Gaming Beast RTX',
-    category:'Gaming PC',
-    price:'R25 999',
-    icon:'🖥️'
-  },
+  // Tracks the most recent action per product id so we can show a brief note.
+  const [notes, setNotes] = useState({})
 
-  {
-    id:4,
-    name:'Nerdy Audio Max',
-    category:'Audio',
-    price:'R2 499',
-    icon:'🎧'
-  },
-
-  {
-    id:5,
-    name:'Smart Watch Pro',
-    category:'Wearables',
-    price:'R1 899',
-    icon:'⌚'
-  },
-
-  {
-    id:6,
-    name:'Creator Camera 4K',
-    category:'Cameras',
-    price:'R8 999',
-    icon:'📷'
+  const flashNote = (id, message) => {
+    setNotes((current) => ({ ...current, [id]: message }))
   }
-]
 
+  const handleAddToCart = (product) => {
+    const added = addToCart?.(product)
+    flashNote(product.id, added === false ? 'Already in cart' : 'Added to cart ✓')
+  }
 
-function Products({addToCart}){
+  const handleAddToWishlist = (product) => {
+    const added = addToWishlist?.(product)
+    flashNote(product.id, added === false ? 'Already saved' : 'Added to wishlist ✓')
+  }
 
-return(
+  return (
+    <div className="products-container">
+      <div className="products-header">
+        <div>
+          <p className="eyebrow">Shop</p>
+          <h2>{department || 'Latest Technology'}</h2>
+          <p className="products-description">
+            {department
+              ? `Browse our ${department} range.`
+              : 'Explore premium gadgets selected by NerdyTech.'}
+          </p>
+        </div>
+        {department ? (
+          <Link className="ghost-btn products-reset" to="/products">
+            ← All products
+          </Link>
+        ) : null}
+      </div>
 
-<div className="products-container">
+      {visibleProducts.length === 0 ? (
+        <p className="products-empty">
+          No products in this department yet.{' '}
+          <Link to="/products">View all products</Link>
+        </p>
+      ) : (
+        <div className="products-grid">
+          {visibleProducts.map((product) => (
+            <div className="tech-card" key={product.id}>
+              <img className="tech-card__img" src={product.image} alt={product.name} />
+              <p className="product-brand">{product.department}</p>
+              <h3>{product.name}</h3>
+              <p className="tech-card__desc">{product.description}</p>
+              <strong>R{product.price.toLocaleString()}</strong>
 
+              <div className="tech-card__actions">
+                <button className="primary-btn" onClick={() => handleAddToCart(product)}>
+                  Add to Cart
+                </button>
+                <button className="ghost-btn" onClick={() => handleAddToWishlist(product)}>
+                  Add to Wishlist
+                </button>
+              </div>
 
-<h2>
-Latest Technology
-</h2>
-
-
-<p className="products-description">
-Explore premium gadgets selected by NerdyTech.
-</p>
-
-
-
-<div className="products-grid">
-
-
-{products.map(product=>(
-
-<div 
-className="tech-card"
-key={product.id}
->
-
-
-<div className="product-icon">
-{product.icon}
-</div>
-
-
-<h3>
-{product.name}
-</h3>
-
-
-<p>
-{product.category}
-</p>
-
-
-<strong>
-{product.price}
-</strong>
-
-
-<button
-onClick={() => {
-  console.log("Button clicked")
-  addToCart(product)
-}}
->
-Add to Cart
-</button>
-
-
-</div>
-
-))}
-
-
-</div>
-
-
-</div>
-
-)
-
+              {notes[product.id] ? <p className="tech-card__note">{notes[product.id]}</p> : null}
+            </div>
+          ))}
+        </div>
+      )}
+    </div>
+  )
 }
-
 
 export default Products

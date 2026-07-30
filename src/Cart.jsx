@@ -1,22 +1,7 @@
 import { useState } from 'react'
 import './Cart.css'
 
-export const starterCart = [
-  {
-    id: 1,
-    name: 'Aurora Headphones',
-    brand: 'NerdyTech',
-    price: 2499,
-    quantity: 1,
-  },
-  {
-    id: 2,
-    name: 'Nova Smart Watch',
-    brand: 'NerdyTech',
-    price: 1899,
-    quantity: 1,
-  },
-]
+export const starterCart = []
 
 function Cart({ cart: providedCart, setCart: providedSetCart, onCheckout, onContinueShopping }) {
   const [localCart, setLocalCart] = useState(starterCart)
@@ -71,9 +56,13 @@ function Cart({ cart: providedCart, setCart: providedSetCart, onCheckout, onCont
           <div className="cart-list">
             {cart.map((item) => (
               <article className="cart-item" key={item.id}>
-                <div className="cart-thumb" aria-hidden="true">
-                  {item.name.slice(0, 2).toUpperCase()}
-                </div>
+                {item.image ? (
+                  <img className="cart-thumb" src={item.image} alt={item.name} />
+                ) : (
+                  <div className="cart-thumb cart-thumb--fallback" aria-hidden="true">
+                    {item.name.slice(0, 2).toUpperCase()}
+                  </div>
+                )}
                 <div className="cart-item-details">
                   <p className="product-brand">{item.brand}</p>
                   <h3>{item.name}</h3>

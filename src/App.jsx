@@ -28,6 +28,20 @@ function App() {
   const combinedTotal = cartTotal + wishlistTotal
   const cartItemCount = cart.length
 
+  // Add a product to the cart. Returns false if it was already there (ignore duplicates).
+  const addToCart = (product) => {
+    if (cart.some((item) => item.id === product.id)) return false
+    setCart((currentCart) => [...currentCart, { ...product, quantity: product.quantity ?? 1 }])
+    return true
+  }
+
+  // Add a product to the wishlist. Returns false if it was already saved.
+  const addToWishlist = (product) => {
+    if (wishlist.some((item) => item.id === product.id)) return false
+    setWishlist((currentWishlist) => [...currentWishlist, product])
+    return true
+  }
+
   const handleAddressChange = (event) => {
     const { name, value } = event.target
     setAddress((currentAddress) => ({ ...currentAddress, [name]: value }))
@@ -76,7 +90,10 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
           <Route path="/home" element={<Home />} />
-          <Route path="/products" element={<Products />} />
+          <Route
+            path="/products"
+            element={<Products addToCart={addToCart} addToWishlist={addToWishlist} />}
+          />
           <Route path="/productdetails" element={<ProductDetails />} />
           <Route
             path="/cart"
@@ -121,6 +138,7 @@ function App() {
                 wishlist={wishlist}
                 setWishlist={setWishlist}
                 onContinue={() => navigate('/address')}
+                onMoveToCart={addToCart}
               />
             }
           />

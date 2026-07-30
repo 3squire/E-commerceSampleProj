@@ -1,31 +1,31 @@
 import { useState } from 'react'
 import './Wishlist.css'
 
-export const starterWishlist = [
-  {
-    id: 1,
-    name: 'Aurora Headphones',
-    brand: 'NerdyTech',
-    description: 'Immersive sound with adaptive noise control and a 40-hour battery life.',
-    price: 2499,
-  },
-  {
-    id: 2,
-    name: 'Nova Smart Watch',
-    brand: 'NerdyTech',
-    description: 'Track workouts, sleep, and notifications in one polished companion.',
-    price: 1899,
-  },
-]
+export const starterWishlist = []
 
-function Wishlist({ wishlist: providedWishlist, setWishlist: providedSetWishlist, onContinue }) {
+function Wishlist({ wishlist: providedWishlist, setWishlist: providedSetWishlist, onContinue, onMoveToCart }) {
   const [localWishlist, setLocalWishlist] = useState(starterWishlist)
   const isControlled = providedWishlist !== undefined && typeof providedSetWishlist === 'function'
   const wishlist = isControlled ? providedWishlist : localWishlist
   const setWishlist = isControlled ? providedSetWishlist : setLocalWishlist
-  const [cartCount, setCartCount] = useState(0)
 
-  const total = wishlist.reduce((sum, item) => sum + item.price, 0)
+  const total = wishlist.reduce((sum, item) => sum + item.price * (item.quantity ?? 1), 0)
+
+  const increase = (id) => {
+    setWishlist((currentWishlist) =>
+      currentWishlist.map((item) =>
+        item.id === id ? { ...item, quantity: (item.quantity ?? 1) + 1 } : item
+      )
+    )
+  }
+
+  const decrease = (id) => {
+    setWishlist((currentWishlist) =>
+      currentWishlist.map((item) =>
+        item.id === id ? { ...item, quantity: Math.max(1, (item.quantity ?? 1) - 1) } : item
+      )
+    )
+  }
 
   const removeWishlist = (id) => {
     setWishlist((currentWishlist) => currentWishlist.filter((item) => item.id !== id))
@@ -34,7 +34,9 @@ function Wishlist({ wishlist: providedWishlist, setWishlist: providedSetWishlist
   const moveAllToCart = () => {
     if (wishlist.length === 0) return
 
-    setCartCount((count) => count + wishlist.length)
+    if (onMoveToCart) {
+      wishlist.forEach((item) => onMoveToCart(item))
+    }
     setWishlist([])
   }
 
@@ -59,15 +61,30 @@ function Wishlist({ wishlist: providedWishlist, setWishlist: providedSetWishlist
           <div className="wishlist-list">
             {wishlist.map((item) => (
               <article className="wish-card" key={item.id}>
-                <div className="wish-thumb" aria-hidden="true">
-                  {item.name.slice(0, 2).toUpperCase()}
-                </div>
+                {item.image ? (
+                  <img className="wish-thumb" src={item.image} alt={item.name} />
+                ) : (
+                  <div className="wish-thumb wish-thumb--fallback" aria-hidden="true">
+                    {item.name.slice(0, 2).toUpperCase()}
+                  </div>
+                )}
                 <div className="wish-card-info">
                   <p className="product-brand">{item.brand}</p>
                   <h3>{item.name}</h3>
                   <p>{item.description}</p>
                 </div>
-                <strong className="wish-card-price">R{item.price.toLocaleString()}</strong>
+                <div className="quantity-controls">
+                  <button onClick={() => decrease(item.id)} aria-label="Decrease quantity">
+                    -
+                  </button>
+                  <span>{item.quantity ?? 1}</span>
+                  <button onClick={() => increase(item.id)} aria-label="Increase quantity">
+                    +
+                  </button>
+                </div>
+                <strong className="wish-card-price">
+                  R{(item.price * (item.quantity ?? 1)).toLocaleString()}
+                </strong>
                 <button
                   className="remove-wish-button"
                   onClick={() => removeWishlist(item.id)}
@@ -97,8 +114,6 @@ function Wishlist({ wishlist: providedWishlist, setWishlist: providedSetWishlist
           </div>
         </>
       )}
-
-      <p className="cart-hint">Cart items moved: {cartCount}</p>
     </section>
   )
 }
