@@ -26,14 +26,14 @@
 }
 
 .contact-info{
-    background:#88b1e8;
+    background:#8DBC0B;
     padding:30px;
     border-radius:15px;
     box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
 
 .contact-info h2{
-    color:#0b4da2;
+    color:#0D2B60;
     margin-bottom:20px;
 }
 
@@ -43,14 +43,14 @@
 }
 
 .contact-form{
-    background:white;
+    background:#00BBB2;
     padding:30px;
     border-radius:15px;
     box-shadow:0 2px 10px rgba(0,0,0,.1);
 }
 
 .contact-form h2{
-    color:#0b4da2;
+    color:#0D2B60;
     margin-bottom:20px;
 }
 
@@ -70,8 +70,8 @@
 
 .contact-form button{
     width:100%;
-    background:#0b4da2;
-    color:white;
+    background:#0D2B60;
+    color:#00BBB2;
     border:none;
     padding:15px;
     font-size:18px;
@@ -89,7 +89,7 @@
 }
 
 .back-home button{
-    background:#0b4da2;
+    background:#08397a;
     color:white;
     border:none;
     padding:15px 35px;
@@ -98,7 +98,8 @@
 }
 
 .back-home button:hover{
-    background:#08397a;
+    background:#00BBB2;
+
 }
 
 @media(max-width:768px){

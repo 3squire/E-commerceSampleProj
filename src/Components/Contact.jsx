@@ -6,6 +6,8 @@ function Contact() {
     <div className="contact-container">
 
       <div className="contact-header">
+       
+       
         <h1>Contact NerdyTech</h1>
         <p>We're here to help with your questions, orders, and technical support.</p>
       </div>
@@ -16,19 +18,21 @@ function Contact() {
           <h2>Get in Touch</h2>
 
           <p><strong>Address</strong></p>
-          <p>123 Tech Street</p>
+          <p>13 Esdoring Street</p>
           <p>Centurion, Gauteng</p>
           <p>South Africa</p>
 
           <br />
 
           <p><strong>Phone</strong></p>
-          <p>+27 12 345 6789</p>
+          <p>069 304 2748</p>
 
           <br />
 
           <p><strong>Email</strong></p>
-          <p>support@nerdytech.co.za</p>
+          <p>neani@dugsonconsulting.co.za</p>
+          <p>lloyd@dugsonconsulting.co.za</p>
+          <p>bongania@dugsonconsulting.co.za</p>
 
           <br />
 

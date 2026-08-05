@@ -9,7 +9,7 @@ background:#f5f5f5;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #0b4da2;
+  background: #8DBC0B;
   padding: 15px 50px;
 }
 
@@ -50,7 +50,7 @@ padding-left: 200px;
 }
 
 .nav-links a:hover {
-  color: #ffd700;
+  color: #0D2B60;
 }
 
 .hero{

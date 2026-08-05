@@ -1,155 +1,188 @@
 *{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:Arial, Helvetica, sans-serif;
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
 body{
-background:#08111f;
+    background:#0D2B60;
 }
 
 .container{
-display:flex;
-height:100vh;
+    display:flex;
+    height:100vh;
 }
 
 .left{
-flex:1;
-background:linear-gradient(135deg,#0d47a1,#1976d2,#42a5f5);
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-color:white;
+    flex:1;
+    background:linear-gradient(135deg,#0D2B60,#00447A,#8DBC0B);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:#FFFFFF;
 }
 
 .left h1{
-font-size:60px;
-margin-bottom:20px;
+    font-size:60px;
+    margin-bottom:20px;
+    color: #8DBC0B
 }
 
 .left p{
-font-size:20px;
+    font-size:20px;
+    color:#FFFFFF;
 }
 
 .right{
-flex:1;
-background:white;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-padding:60px;
+    flex:1;
+    background:#FFFFFF;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:60px;
 }
 
-/* Single centered card so the whole block sits together in the white panel */
 .login-card{
-width:100%;
-max-width:380px;
-display:flex;
-flex-direction:column;
+    width:100%;
+    max-width:380px;
+    display:flex;
+    flex-direction:column;
 }
 
 .login-card h2{
-font-size:34px;
-margin-bottom:8px;
-text-align:center;
-color:#0d1b2a;
+    font-size:34px;
+    margin-bottom:8px;
+    text-align:center;
+    color:#0D2B60;
 }
 
 .login-card > p{
-margin-bottom:32px;
-color:gray;
-text-align:center;
+    margin-bottom:32px;
+    color:#00447A;
+    text-align:center;
 }
 
 .right form{
-display:flex;
-flex-direction:column;
+    display:flex;
+    flex-direction:column;
 }
 
 .right input{
-padding:15px;
-margin-bottom:16px;
-font-size:16px;
-border:1px solid #ddd;
-border-radius:8px;
+    padding:15px;
+    margin-bottom:16px;
+    font-size:16px;
+    border:2px solid #8DBC0B;
+    border-radius:8px;
+    outline:none;
+    transition:0.3s;
+}
+
+.right input:focus{
+    border-color:#8DBC0B;
+    box-shadow:0 0 8px rgba(141,188,11,.3);
 }
 
 .right form a{
-text-decoration:none;
-margin-bottom:20px;
-color:#1976d2;
-font-size:14px;
-align-self:flex-end;
+    text-decoration:none;
+    margin-bottom:20px;
+    color:#8DBC0B;
+    font-size:14px;
+    align-self:flex-end;
+}
+
+.right form a:hover{
+    color:#8DBC0B;
 }
 
 .right button{
-padding:15px;
-border:none;
-border-radius:8px;
-cursor:pointer;
-font-size:16px;
-margin-bottom:15px;
-transition:0.3s;
+    padding:15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    margin-bottom:15px;
+    transition:0.3s;
+    font-weight:bold;
 }
 
 .right button:hover{
-opacity:.9;
+    transform:translateY(-2px);
 }
 
 .right form button{
-background:#1976d2;
-color:white;
+    background:#0D2B60;
+    color:white;
+}
+
+.right form button:hover{
+    background:#00447A;
 }
 
 .google{
-background:white;
-border:1px solid #ddd;
+    background:#8DBC0B;
+    color:white;
+}
+
+.google:hover{
+    background:#00447A;
 }
 
 .github{
-background:#24292e;
-color:white;
+    background:#000000;
+    color:white;
+}
+
+.github:hover{
+    background:#0D2B60;
 }
 
 .divider{
-text-align:center;
-margin:20px 0;
-color:gray;
+    text-align:center;
+    margin:20px 0;
+    color:#00447A;
+    font-weight:bold;
 }
 
 .register{
-text-align:center;
-margin-top:10px;
+    text-align:center;
+    margin-top:10px;
+    color:#00447A;
 }
 
 .register a{
-text-decoration:none;
-color:#1976d2;
+    text-decoration:none;
+    color:#8DBC0B;
+    font-weight:bold;
+}
+
+.register a:hover{
+    color:#8DBC0B;
 }
 
 @media(max-width:768px){
 
 .container{
-flex-direction:column;
+    flex-direction:column;
 }
 
 .left{
-height:35vh;
+    height:35vh;
 }
 
 .right{
-height:65vh;
-padding:30px;
+    height:65vh;
+    padding:30px;
 }
 
 .left h1{
-font-size:40px;
+    font-size:40px;
 }
 
 }
+
 .login-logo{
     width:90px;
     height:90px;
@@ -157,17 +190,27 @@ font-size:40px;
     border-radius:50%;
     display:block;
     margin:0 auto 20px;
-    box-shadow:0 4px 10px rgba(0,0,0,0.2);
+    box-shadow:0 5px 15px rgba(13,43,96,.3);
 }
 
 .forgot-link{
     display:block;
     margin-bottom:20px;
-    color:#1565c0;
+    color:#8DBC0B;
     text-decoration:none;
     font-size:14px;
 }
 
 .forgot-link:hover{
+    color:#8DBC0B;
     text-decoration:underline;
+}
+
+.left .logo{
+    width:120px;
+    height:120px;
+    object-fit:contain;
+    display:block;
+    margin:0 auto 20px;
+
 }

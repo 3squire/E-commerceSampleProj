@@ -19,7 +19,12 @@ function Login() {
   return (
     <div className="container">
       <div className="left">
-        <h1>NerdyTech</h1>
+         <img
+      src="src/assets/hry.png"
+      alt="NerdyTech Logo"
+      className="logo"
+    />
+        <h1>DugsonTech</h1>
         <p>Your Favourite Tech Store</p>
       </div>
 
