@@ -204,9 +204,6 @@ function Wishlist() {
                 <p>Total due</p>
                 <strong>R{total.toFixed(2)}</strong>
               </div>
-              <button className="primary-btn" onClick={() => setStep('address')}>
-                Continue to address
-              </button>
             </div>
           </div>
         )}

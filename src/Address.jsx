@@ -27,16 +27,39 @@ function Address({ address: providedAddress, onChange, onSubmit, onBack }) {
   const isControlled = providedAddress !== undefined && typeof onChange === 'function'
   const address = isControlled ? providedAddress : formAddress
 
+  const sanitizeValue = (name, value) => {
+    if (name === 'postalCode') {
+      return value.replace(/\D/g, '').slice(0, 4)
+    }
+
+    if (name === 'phone') {
+      const digits = value.replace(/\D/g, '').replace(/^27/, '').slice(0, 9)
+      const part1 = digits.slice(0, 2)
+      const part2 = digits.slice(2, 5)
+      const part3 = digits.slice(5, 9)
+
+      if (!digits) return ''
+      if (part1 && part2 && part3) return `(+27) ${part1} ${part2} ${part3}`
+      if (part1 && part2) return `(+27) ${part1} ${part2}`
+      if (part1) return `(+27) ${part1}`
+      return '(+27)'
+    }
+
+    return value
+  }
+
   const handleChange = (event) => {
+    const { name, value } = event.target
+    const nextValue = sanitizeValue(name, value)
+
     if (isControlled) {
-      onChange(event)
+      onChange({ target: { name, value: nextValue } })
       return
     }
 
-    const { name, value } = event.target
     setFormAddress((currentAddress) => ({
       ...currentAddress,
-      [name]: value,
+      [name]: nextValue,
     }))
   }
 
@@ -103,11 +126,28 @@ function Address({ address: providedAddress, onChange, onSubmit, onBack }) {
           </label>
           <label>
             Postal code
-            <input name="postalCode" value={address.postalCode} onChange={handleChange} required />
+            <input
+              name="postalCode"
+              value={address.postalCode}
+              onChange={handleChange}
+              inputMode="numeric"
+              pattern="[0-9]{4}"
+              maxLength={4}
+              required
+            />
           </label>
           <label>
             Phone number
-            <input name="phone" value={address.phone} onChange={handleChange} required />
+            <input
+              name="phone"
+              value={address.phone}
+              onChange={handleChange}
+              inputMode="tel"
+              pattern="\(\+27\) [0-9]{2} [0-9]{3} [0-9]{4}"
+              placeholder="(+27) 12 345 6789"
+              maxLength={18}
+              required
+            />
           </label>
         </div>
 

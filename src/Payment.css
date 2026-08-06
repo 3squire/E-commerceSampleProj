@@ -10,6 +10,10 @@
   margin-bottom: 4px;
 }
 
+.payment-form__footer .primary-btn {
+  align-self: stretch;
+}
+
 .form-grid select {
   padding: 10px 12px;
   border: 1px solid rgba(0, 224, 255, 0.2);
