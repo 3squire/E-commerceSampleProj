@@ -40,8 +40,22 @@ function App() {
   const hideNav = ['/', '/register', '/forgot-password'].includes(location.pathname)
   const [address, setAddress] = useState(defaultAddress)
   const [payment, setPayment] = useState(defaultPayment)
-  const [cart, setCart] = useState(starterCart)
-  const [wishlist, setWishlist] = useState(starterWishlist)
+  const [cart, setCart] = useState(() => {
+    try {
+      const savedCart = localStorage.getItem('nerdytech-cart')
+      return savedCart ? JSON.parse(savedCart) : starterCart
+    } catch {
+      return starterCart
+    }
+  })
+  const [wishlist, setWishlist] = useState(() => {
+    try {
+      const savedWishlist = localStorage.getItem('nerdytech-wishlist')
+      return savedWishlist ? JSON.parse(savedWishlist) : starterWishlist
+    } catch {
+      return starterWishlist
+    }
+  })
   const [theme, setTheme] = useState(() => localStorage.getItem('nerdytech-theme') || 'dark')
   const [isNavigating, setIsNavigating] = useState(false)
 
@@ -60,15 +74,36 @@ function App() {
     document.title = `${pageTitles[location.pathname] || 'NerdyTech'} | NerdyTech`
   }, [location.pathname])
 
-  const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
-  const wishlistTotal = wishlist.reduce((sum, item) => sum + item.price, 0)
-  const combinedTotal = cartTotal + wishlistTotal
-  const cartItemCount = cart.length
+  useEffect(() => {
+    localStorage.setItem('nerdytech-wishlist', JSON.stringify(wishlist))
+  }, [wishlist])
 
-  // Add a product to the cart. Returns false if it was already there (ignore duplicates).
+  useEffect(() => {
+    localStorage.setItem('nerdytech-cart', JSON.stringify(cart))
+  }, [cart])
+
+  const cartTotal = cart.reduce((sum, item) => sum + item.price * (item.quantity ?? 1), 0)
+  const wishlistTotal = wishlist.reduce((sum, item) => sum + item.price * (item.quantity ?? 1), 0)
+  const combinedTotal = cartTotal + wishlistTotal
+  const cartItemCount = cart.reduce((sum, item) => sum + (item.quantity ?? 1), 0)
+
+  // Add a product to the cart. If it already exists, increase its quantity.
   const addToCart = (product) => {
-    if (cart.some((item) => item.id === product.id)) return false
-    setCart((currentCart) => [...currentCart, { ...product, quantity: product.quantity ?? 1 }])
+    const targetQuantity = product.quantity ?? 1
+
+    const existingItem = cart.find((item) => item.id === product.id)
+    if (existingItem) {
+      setCart((currentCart) =>
+        currentCart.map((item) =>
+          item.id === product.id
+            ? { ...item, quantity: (item.quantity ?? 1) + targetQuantity }
+            : item
+        )
+      )
+      return true
+    }
+
+    setCart((currentCart) => [...currentCart, { ...product, quantity: targetQuantity }])
     return true
   }
 
@@ -96,6 +131,7 @@ function App() {
 
   const handlePaymentSubmit = (event) => {
     event.preventDefault()
+    setCart([])
     navigate('/order-confirmed')
   }
 

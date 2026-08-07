@@ -29,7 +29,8 @@ function Cart({ cart: providedCart, setCart: providedSetCart, onCheckout, onCont
     setCart((currentCart) => currentCart.filter((item) => item.id !== id))
   }
 
-  const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
+  const total = cart.reduce((sum, item) => sum + item.price * (item.quantity ?? 1), 0)
+  const itemCount = cart.reduce((sum, item) => sum + (item.quantity ?? 1), 0)
 
   return (
     <section className="cart-page">
@@ -38,7 +39,7 @@ function Cart({ cart: providedCart, setCart: providedSetCart, onCheckout, onCont
           <p className="eyebrow">Cart</p>
           <h2>Your selected gadgets</h2>
         </div>
-        <span className="cart-pill">{cart.length} items</span>
+        <span className="cart-pill">{itemCount} {itemCount === 1 ? 'item' : 'items'}</span>
       </div>
 
       {cart.length === 0 ? (

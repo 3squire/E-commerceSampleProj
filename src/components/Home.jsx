@@ -3,6 +3,8 @@ import "./Home.css";
 import logo from "../assets/nerdytech.jpeg";
 import { departments } from "../catalog.js";
 
+const APP_VERSION = '1.5'
+
 function Home() {
   return (
     <div className="home-page">
@@ -38,6 +40,7 @@ function Home() {
         <img src={logo} alt="NerdyTech logo" className="footer-logo" />
         <h3>NerdyTech</h3>
         <p>Smart Tech. Easy Shopping.</p>
+        <p>Version {APP_VERSION}</p>
         <p>© 2026 NerdyTech. All Rights Reserved.</p>
       </footer>
     </div>

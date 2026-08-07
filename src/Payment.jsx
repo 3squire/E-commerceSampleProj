@@ -19,6 +19,30 @@ function Payment({ payment: providedPayment, onChange, onSubmit, onBack, address
   const effectiveTotal = total || 0
   const effectiveItemCount = itemCount || 0
 
+  const sanitizeValue = (name, value) => {
+    if (name === 'cardNumber') {
+      const digits = value.replace(/\D/g, '').slice(0, 16)
+      const part1 = digits.slice(0, 4)
+      const part2 = digits.slice(4, 8)
+      const part3 = digits.slice(8, 12)
+      const part4 = digits.slice(12, 16)
+
+      return [part1, part2, part3, part4].filter(Boolean).join(' ')
+    }
+
+    if (name === 'expiry') {
+      const digits = value.replace(/\D/g, '').slice(0, 4)
+      if (digits.length <= 2) return digits
+      return `${digits.slice(0, 2)}/${digits.slice(2, 4)}`
+    }
+
+    if (name === 'cvc') {
+      return value.replace(/\D/g, '').slice(0, 3)
+    }
+
+    return value
+  }
+
   let effectiveAddress = address
   if (!effectiveAddress || !effectiveAddress.fullName) {
     try {
@@ -30,15 +54,17 @@ function Payment({ payment: providedPayment, onChange, onSubmit, onBack, address
   }
 
   const handleChange = (event) => {
+    const { name, value } = event.target
+    const nextValue = sanitizeValue(name, value)
+
     if (isControlled) {
-      onChange(event)
+      onChange({ target: { name, value: nextValue } })
       return
     }
 
-    const { name, value } = event.target
     setFormPayment((currentPayment) => ({
       ...currentPayment,
-      [name]: value,
+      [name]: nextValue,
     }))
   }
 
@@ -89,15 +115,41 @@ function Payment({ payment: providedPayment, onChange, onSubmit, onBack, address
             </label>
             <label>
               Card number
-              <input name="cardNumber" value={payment.cardNumber} onChange={handleChange} required />
+              <input
+                name="cardNumber"
+                value={payment.cardNumber}
+                onChange={handleChange}
+                inputMode="numeric"
+                pattern="[0-9]{4} [0-9]{4} [0-9]{4} [0-9]{4}"
+                maxLength={19}
+                placeholder="1234 5678 9012 3456"
+                required
+              />
             </label>
             <label>
               Expiry date
-              <input name="expiry" value={payment.expiry} onChange={handleChange} required />
+              <input
+                name="expiry"
+                value={payment.expiry}
+                onChange={handleChange}
+                inputMode="numeric"
+                pattern="(0[1-9]|1[0-2])/[0-9]{2}"
+                maxLength={5}
+                placeholder="MM/YY"
+                required
+              />
             </label>
             <label>
               CVC
-              <input name="cvc" value={payment.cvc} onChange={handleChange} required />
+              <input
+                name="cvc"
+                value={payment.cvc}
+                onChange={handleChange}
+                inputMode="numeric"
+                pattern="[0-9]{3}"
+                maxLength={3}
+                required
+              />
             </label>
           </>
         )}
@@ -116,9 +168,12 @@ function Payment({ payment: providedPayment, onChange, onSubmit, onBack, address
         )}
       </div>
 
-      <button type="submit" className="primary-btn">
-        Pay now
-      </button>
+      <div className="address-form__footer payment-form__footer">
+        <span className="payment-form__hint">Secure checkout</span>
+        <button type="submit" className="primary-btn">
+          Pay now
+        </button>
+      </div>
     </form>
   )
 }

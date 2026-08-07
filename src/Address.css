@@ -63,6 +63,16 @@
   margin-top: 16px;
 }
 
+.payment-form__footer {
+  margin-top: 18px;
+  padding-top: 4px;
+}
+
+.payment-form__hint {
+  color: #88a8d3;
+  font-size: 0.9rem;
+}
+
 @media (max-width: 760px) {
   .form-grid {
     grid-template-columns: 1fr;
