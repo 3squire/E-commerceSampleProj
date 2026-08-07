@@ -88,7 +88,7 @@ function Wishlist() {
         <div className="brand-block">
           <img src={techyImage} alt="Techy icon" className="brand-icon" />
           <div>
-            <p className="eyebrow">NerdyTech</p>
+            <p className="eyebrow">DugsonTech</p>
             <h1>Curate your next favorite gadget</h1>
           </div>
         </div>

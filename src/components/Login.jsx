@@ -1,5 +1,6 @@
 import "./Login.css";
 import { Link, useNavigate } from "react-router-dom";
+import logo from "../assets/dugson-consulting.jpg";
 
 function Login() {
   const navigate = useNavigate();
@@ -20,8 +21,8 @@ function Login() {
     <div className="container">
       <div className="left">
          <img
-      src="src/assets/hry.png"
-      alt="NerdyTech Logo"
+      src={logo}
+      alt="DugsonTech logo"
       className="logo"
     />
         <h1>DugsonTech</h1>

@@ -1,6 +1,52 @@
 :root[data-theme='light'] {
-  background: linear-gradient(135deg, #eff7ff 0%, #f9fbff 48%, #f5efff 100%);
-  color: #142342;
+  background: linear-gradient(135deg, #eef9f4 0%, #ffffff 48%, #eff7df 100%);
+  color: var(--text-primary);
+}
+
+/* DugsonTech palette and readable theme-wide defaults */
+.app-shell { color: var(--text-primary); }
+.topbar, .products-container, .cart-page, .wishlist-page, .address-page,
+.checkout-card, .wishlist-empty, .empty-state, .order-confirmation, .home-page,
+.category-card, .tech-card, .cart-item, .wish-card, .cart-summary,
+.wishlist-summary, .products-search, .payment-page, .policy-container,
+.contact-container { border-color: rgba(16, 170, 164, .38); }
+
+.app-shell h1, .app-shell h2, .app-shell h3, .app-shell label,
+.app-shell strong { color: var(--text-primary); }
+.app-shell p { color: var(--text-secondary); }
+.app-shell .eyebrow, .app-shell .product-brand,
+.app-shell a:not(.brand):not(.category-card) { color: var(--brand-teal); }
+.app-shell .primary-btn, .hero button, .right form button {
+  background: linear-gradient(135deg, var(--brand-teal), var(--brand-blue));
+  color: #fff;
+}
+.app-shell .primary-btn:hover, .hero button:hover { filter: brightness(1.08); }
+.app-shell input, .app-shell select, .app-shell textarea {
+  background: var(--surface-strong);
+  color: var(--text-primary);
+  border-color: rgba(16, 170, 164, .5);
+}
+.app-shell input::placeholder, .app-shell textarea::placeholder { color: var(--text-secondary); opacity: .8; }
+.theme-toggle { border-color: var(--brand-teal); background: rgba(16, 170, 164, .16); color: #fff; }
+
+.light-mode .topbar { background: rgba(255,255,255,.96); }
+.light-mode .brand, .light-mode .nav-links a { color: var(--brand-navy); }
+.light-mode .nav-links a:hover, .light-mode .nav-links a.active { color: #fff; }
+.light-mode .theme-toggle { background: var(--brand-navy); color: #fff; border-color: var(--brand-teal); }
+.light-mode .products-container, .light-mode .tech-card, .light-mode .products-search,
+.light-mode .product-modal__card { background: var(--surface-strong); color: var(--text-primary); }
+.light-mode .tech-card__desc, .light-mode .products-description,
+.light-mode .products-filter-status, .light-mode .product-modal__content p { color: var(--text-secondary); }
+
+/* Component styles use these shared actions across cart, wishlist and checkout. */
+.app-shell .checkout-btn, .app-shell .move-all-btn, .app-shell .cart-summary button,
+.app-shell .wishlist-summary button, .app-shell .submit-btn {
+  background: linear-gradient(135deg, var(--brand-teal), var(--brand-blue) 65%, var(--brand-green));
+  color: #fff;
+}
+.app-shell .ghost-btn, .app-shell .text-btn {
+  color: var(--brand-teal);
+  border-color: rgba(16, 170, 164, .55);
 }
 
 .app-shell.light-mode {
@@ -96,4 +142,132 @@
   .theme-toggle {
     width: 100%;
   }
+}
+
+/* Final palette layer: keeps every component consistent in both themes. */
+.dark-mode .topbar, .dark-mode .products-container, .dark-mode .tech-card,
+.dark-mode .products-search, .dark-mode .cart-page, .dark-mode .wishlist-page,
+.dark-mode .address-page, .dark-mode .checkout-card, .dark-mode .cart-summary,
+.dark-mode .wishlist-summary, .dark-mode .order-confirmation {
+  background: linear-gradient(145deg, rgba(7, 38, 76, .96), rgba(6, 31, 69, .9));
+  border-color: rgba(13, 148, 136, .45);
+  color: var(--text-primary);
+}
+.dark-mode .nav-links a { color: #eaf7f4; }
+.dark-mode .brand span, .dark-mode p, .dark-mode .tech-card__desc { color: #c5dcd9; }
+
+.light-mode .topbar, .light-mode .products-container, .light-mode .tech-card,
+.light-mode .products-search, .light-mode .cart-page, .light-mode .wishlist-page,
+.light-mode .address-page, .light-mode .checkout-card, .light-mode .cart-summary,
+.light-mode .wishlist-summary, .light-mode .order-confirmation {
+  background: rgba(255, 255, 255, .96);
+  border-color: rgba(13, 148, 136, .28);
+  color: #061f45;
+  box-shadow: 0 15px 38px rgba(6, 31, 69, .1);
+}
+.light-mode h1, .light-mode h2, .light-mode h3, .light-mode strong,
+.light-mode label, .light-mode .brand, .light-mode .nav-links a { color: #061f45; }
+.light-mode p, .light-mode .tech-card__desc, .light-mode .products-description { color: #3d5f68; }
+.light-mode .theme-toggle { background: #061f45; color: #fff; border-color: var(--brand-teal); }
+
+/* Light mode text contrast */
+:root[data-theme='light'] .app-shell,
+:root[data-theme='light'] .app-shell h1,
+:root[data-theme='light'] .app-shell h2,
+:root[data-theme='light'] .app-shell h3,
+:root[data-theme='light'] .app-shell h4,
+:root[data-theme='light'] .app-shell p,
+:root[data-theme='light'] .app-shell span,
+:root[data-theme='light'] .app-shell strong,
+:root[data-theme='light'] .app-shell label,
+:root[data-theme='light'] .app-shell a,
+:root[data-theme='light'] .app-shell li,
+:root[data-theme='light'] .app-shell .eyebrow,
+:root[data-theme='light'] .app-shell .product-brand,
+:root[data-theme='light'] .app-shell .tech-card__desc,
+:root[data-theme='light'] .app-shell .tech-card__view,
+:root[data-theme='light'] .app-shell .products-description,
+:root[data-theme='light'] .app-shell .products-filter-status,
+:root[data-theme='light'] .app-shell .product-modal__content p {
+  color: #061f45 !important;
+}
+
+:root[data-theme='light'] .app-shell input,
+:root[data-theme='light'] .app-shell select,
+:root[data-theme='light'] .app-shell textarea {
+  color: #061f45 !important;
+  background: #fff !important;
+}
+
+:root[data-theme='light'] .app-shell input::placeholder,
+:root[data-theme='light'] .app-shell textarea::placeholder {
+  color: #52677c !important;
+  opacity: 1;
+}
+
+:root[data-theme='light'] .app-shell .primary-btn,
+:root[data-theme='light'] .app-shell .primary-btn span,
+:root[data-theme='light'] .app-shell .theme-toggle,
+:root[data-theme='light'] .app-shell .nav-links a.active,
+:root[data-theme='light'] .app-shell .nav-links a:hover,
+:root[data-theme='light'] .app-shell .checkout-btn,
+:root[data-theme='light'] .app-shell .submit-btn {
+  color: #fff !important;
+}
+
+:root[data-theme='light'] .app-shell .product-cart-btn {
+  color: #061f45 !important;
+  background: linear-gradient(135deg, #b4d83a, #84b91c) !important;
+}
+
+.app-shell .policy-section h2 {
+  color: #84b91c !important;
+}
+
+.app-shell .policy-section p,
+.app-shell .policy-section li,
+.app-shell .policy-section strong {
+  color: #061f45 !important;
+}
+
+:root[data-theme='light'] .home-page .hero {
+  background: linear-gradient(120deg, #39777d 0%, #26736b 48%, #667f25 100%);
+  border-color: rgba(13, 148, 136, .35);
+}
+
+:root[data-theme='light'] .home-page footer {
+  background: linear-gradient(120deg, #39777d 0%, #26736b 48%, #667f25 100%);
+  border-color: rgba(13, 148, 136, .35);
+}
+
+:root[data-theme='light'] .home-page .hero h1,
+:root[data-theme='light'] .home-page .hero p {
+  color: #03162f !important;
+}
+
+:root[data-theme='dark'] .app-shell .nav-links a,
+:root[data-theme='dark'] .app-shell .nav-links a:visited {
+  color: #ffffff !important;
+}
+
+:root[data-theme='dark'] .app-shell .products-container {
+  background: linear-gradient(145deg, #164d72 0%, #125a70 52%, #1b526b 100%);
+  border-color: rgba(132, 185, 28, .48);
+  box-shadow: 0 18px 45px rgba(2, 18, 39, .3);
+}
+
+:root[data-theme='dark'] .app-shell .policy-header h1,
+:root[data-theme='dark'] .app-shell .policy-header p,
+:root[data-theme='dark'] .app-shell .contact-header h1,
+:root[data-theme='dark'] .app-shell .contact-header p {
+  color: #ffffff !important;
+}
+
+.app-shell .home-page .categories h2,
+.app-shell .home-page .category-card p {
+  color: #061f45 !important;
+}
+
+:root[data-theme='dark'] .app-shell .home-page .categories h2 {
+  color: #ffffff !important;
 }

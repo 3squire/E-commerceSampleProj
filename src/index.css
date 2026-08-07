@@ -1,16 +1,32 @@
 :root {
+  --brand-navy: #061f45;
+  --brand-blue: #075985;
+  --brand-teal: #0d9488;
+  --brand-green: #84b91c;
+  --brand-lime: #b4d83a;
+  --surface: rgba(6, 31, 69, 0.92);
+  --surface-strong: #0a3158;
+  --text-primary: #f7fbff;
+  --text-secondary: #c6dcdf;
   font-family: 'Segoe UI', Roboto, sans-serif;
   line-height: 1.5;
   font-weight: 400;
-  color: #e8f1ff;
+  color: var(--text-primary);
   background:
-    radial-gradient(circle at top left, rgba(0, 224, 255, 0.26), transparent 30%),
-    radial-gradient(circle at top right, rgba(255, 0, 153, 0.22), transparent 28%),
-    linear-gradient(135deg, #060816 0%, #10193a 45%, #060816 100%);
+    radial-gradient(circle at top left, rgba(16, 170, 164, 0.3), transparent 34%),
+    radial-gradient(circle at top right, rgba(134, 197, 31, 0.2), transparent 30%),
+    linear-gradient(145deg, #04152e 0%, #073a55 52%, #061f45 100%);
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+:root[data-theme='light'] {
+  --surface: rgba(255, 255, 255, 0.94);
+  --surface-strong: #ffffff;
+  --text-primary: #06285b;
+  --text-secondary: #31566d;
 }
 
 * {
@@ -22,6 +38,8 @@ body {
   min-height: 100vh;
   background: transparent;
 }
+
+body.modal-open { overflow: hidden; }
 
 button,
 input,

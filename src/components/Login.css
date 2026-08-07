@@ -214,3 +214,5 @@ body{
     margin:0 auto 20px;
 
 }
+
+.left > .logo { width: 150px; height: 150px; object-fit: contain; border-radius: 28px; background: #fff; padding: 10px; margin-bottom: 20px; }
