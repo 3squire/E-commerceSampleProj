@@ -235,6 +235,11 @@
   border-color: rgba(13, 148, 136, .35);
 }
 
+:root[data-theme='light'] .home-page footer {
+  background: linear-gradient(120deg, #39777d 0%, #26736b 48%, #667f25 100%);
+  border-color: rgba(13, 148, 136, .35);
+}
+
 :root[data-theme='light'] .home-page .hero h1,
 :root[data-theme='light'] .home-page .hero p {
   color: #03162f !important;
@@ -255,5 +260,14 @@
 :root[data-theme='dark'] .app-shell .policy-header p,
 :root[data-theme='dark'] .app-shell .contact-header h1,
 :root[data-theme='dark'] .app-shell .contact-header p {
+  color: #ffffff !important;
+}
+
+.app-shell .home-page .categories h2,
+.app-shell .home-page .category-card p {
+  color: #061f45 !important;
+}
+
+:root[data-theme='dark'] .app-shell .home-page .categories h2 {
   color: #ffffff !important;
 }
