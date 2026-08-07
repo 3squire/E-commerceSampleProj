@@ -16,6 +16,23 @@ import Products from './components/Products.jsx'
 import ProductDetails from './components/ProductDetails.jsx'
 import Policy from "./components/Policy";
 import Contact from "./components/Contact";
+import Spinner from './components/Spinner.jsx'
+
+const pageTitles = {
+  '/': 'Login',
+  '/register': 'Create account',
+  '/forgot-password': 'Reset password',
+  '/home': 'Home',
+  '/products': 'Products',
+  '/productdetails': 'Product details',
+  '/cart': 'Your cart',
+  '/wishlist': 'Wishlist',
+  '/address': 'Delivery address',
+  '/payment': 'Payment',
+  '/order-confirmed': 'Order confirmed',
+  '/contact': 'Contact us',
+  '/policy': 'Policies',
+}
 
 function App() {
   const navigate = useNavigate()
@@ -26,11 +43,22 @@ function App() {
   const [cart, setCart] = useState(starterCart)
   const [wishlist, setWishlist] = useState(starterWishlist)
   const [theme, setTheme] = useState(() => localStorage.getItem('nerdytech-theme') || 'dark')
+  const [isNavigating, setIsNavigating] = useState(false)
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
     localStorage.setItem('nerdytech-theme', theme)
   }, [theme])
+
+  useEffect(() => {
+    setIsNavigating(true)
+    const timer = setTimeout(() => setIsNavigating(false), 350)
+    return () => clearTimeout(timer)
+  }, [location.pathname])
+
+  useEffect(() => {
+    document.title = `${pageTitles[location.pathname] || 'NerdyTech'} | NerdyTech`
+  }, [location.pathname])
 
   const cartTotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0)
   const wishlistTotal = wishlist.reduce((sum, item) => sum + item.price, 0)
@@ -73,6 +101,7 @@ function App() {
 
   return (
     <div className={`app-shell ${theme === 'light' ? 'light-mode' : 'dark-mode'}`}>
+      {isNavigating && <Spinner />}
       {!hideNav && (
       <header className="topbar">
         <NavLink to="/home" className="brand">
