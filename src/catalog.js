@@ -72,7 +72,7 @@ export const products = [
   {
     id: 1,
     name: 'NerdyBook Pro 15',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Laptops',
     description: 'Intel Core i7, 16GB RAM, 512GB SSD, sleek silver chassis.',
     price: 18999,
@@ -81,7 +81,7 @@ export const products = [
   {
     id: 2,
     name: 'NerdyBook Gaming RTX',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Laptops',
     description: 'Ryzen 9, RTX GPU, 32GB RAM, high-refresh display.',
     price: 24999,
@@ -90,7 +90,7 @@ export const products = [
   {
     id: 3,
     name: 'NerdyBook Neon RGB',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Laptops',
     description: 'RGB backlit keyboard, Core i9, 1TB SSD, 240Hz screen.',
     price: 27999,
@@ -99,7 +99,7 @@ export const products = [
   {
     id: 4,
     name: 'NerdyBook Air 13',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Laptops',
     description: 'Ultra-light white shell, Intel Core i5, 8GB RAM, 256GB SSD.',
     price: 11999,
@@ -110,7 +110,7 @@ export const products = [
   {
     id: 5,
     name: 'Galaxy Pro Phone',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Phones',
     description: '6.7" AMOLED display, 256GB storage, triple camera.',
     price: 12999,
@@ -119,7 +119,7 @@ export const products = [
   {
     id: 6,
     name: 'Galaxy Edge Phone',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Phones',
     description: '6.5" curved OLED, 128GB storage, fast 65W charging.',
     price: 10499,
@@ -128,7 +128,7 @@ export const products = [
   {
     id: 7,
     name: 'Galaxy Nature Phone',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Phones',
     description: 'Forest-green finish, 6.4" OLED, triple 50MP camera.',
     price: 9999,
@@ -137,7 +137,7 @@ export const products = [
   {
     id: 8,
     name: 'Galaxy Lite Phone',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Phones',
     description: '6.1" OLED display, 64GB storage, dual camera.',
     price: 7999,
@@ -148,7 +148,7 @@ export const products = [
   {
     id: 9,
     name: 'Gaming Beast RTX',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Desktop PCs',
     description: 'Ryzen 9, RTX GPU, 32GB RAM, RGB liquid cooled.',
     price: 25999,
@@ -157,7 +157,7 @@ export const products = [
   {
     id: 10,
     name: 'Compact Mini PC',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Desktop PCs',
     description: 'Tiny footprint, Core i5, 16GB RAM, 512GB SSD.',
     price: 8999,
@@ -166,7 +166,7 @@ export const products = [
   {
     id: 11,
     name: 'Creator Tower Silver',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Desktop PCs',
     description: 'Brushed-aluminium tower, Core i7, 32GB RAM, 1TB SSD.',
     price: 16999,
@@ -175,7 +175,7 @@ export const products = [
   {
     id: 12,
     name: 'Office Tower Pro',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Desktop PCs',
     description: 'Intel Core i5, 16GB RAM, 1TB SSD, integrated graphics.',
     price: 13999,
@@ -186,7 +186,7 @@ export const products = [
   {
     id: 13,
     name: 'Nerdy Audio Max',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Audio',
     description: 'Over-ear headphones, adaptive noise control, 40-hour battery.',
     price: 2499,
@@ -195,7 +195,7 @@ export const products = [
   {
     id: 14,
     name: 'Nerdy Buds Pro',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Audio',
     description: 'Wireless earbuds with active noise cancelling.',
     price: 1499,
@@ -204,7 +204,7 @@ export const products = [
   {
     id: 15,
     name: 'Nerdy Bookshelf Speakers',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Audio',
     description: 'Wooden bookshelf pair, rich bass, Bluetooth 5.3.',
     price: 3299,
@@ -213,7 +213,7 @@ export const products = [
   {
     id: 16,
     name: 'Nerdy Soundbar Slim',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Audio',
     description: 'Slim TV soundbar with wireless subwoofer support.',
     price: 2799,
@@ -224,7 +224,7 @@ export const products = [
   {
     id: 17,
     name: 'Smart Watch Pro',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Smart Watches',
     description: 'Round AMOLED, track workouts, sleep, and notifications.',
     price: 1899,
@@ -233,7 +233,7 @@ export const products = [
   {
     id: 18,
     name: 'Smart Watch Sport',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Smart Watches',
     description: 'Woven sport band, GPS, heart-rate, 5ATM water resistant.',
     price: 1699,
@@ -242,7 +242,7 @@ export const products = [
   {
     id: 19,
     name: 'Smart Watch Classic',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Smart Watches',
     description: 'Leather strap, chronograph dials, always-on display.',
     price: 2199,
@@ -251,7 +251,7 @@ export const products = [
   {
     id: 20,
     name: 'Smart Watch Lite',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Smart Watches',
     description: 'Everyday fitness tracking with a 7-day battery life.',
     price: 1199,
@@ -262,7 +262,7 @@ export const products = [
   {
     id: 21,
     name: 'Creator Camera 4K',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Cameras',
     description: 'DSLR-style 4K shooter with 18-55mm zoom lens.',
     price: 8999,
@@ -271,7 +271,7 @@ export const products = [
   {
     id: 22,
     name: 'Street Rangefinder',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Cameras',
     description: 'Retro rangefinder, fixed prime lens, silver-top body.',
     price: 10499,
@@ -280,7 +280,7 @@ export const products = [
   {
     id: 23,
     name: 'Mirrorless Pro',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Cameras',
     description: 'Full-frame mirrorless, in-body stabilisation, 4K60.',
     price: 15999,
@@ -289,7 +289,7 @@ export const products = [
   {
     id: 24,
     name: 'Rugged Adventure Cam',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Cameras',
     description: 'Waterproof, shockproof compact for the outdoors.',
     price: 4499,
@@ -300,7 +300,7 @@ export const products = [
   {
     id: 25,
     name: 'Nerdy Mechanical RGB',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Keyboards',
     description: 'Full-size hot-swap mechanical board with per-key RGB.',
     price: 1799,
@@ -309,7 +309,7 @@ export const products = [
   {
     id: 26,
     name: 'Nerdy Retro TKL',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Keyboards',
     description: 'Tenkeyless retro keycaps, tactile switches, USB-C.',
     price: 1499,
@@ -318,7 +318,7 @@ export const products = [
   {
     id: 27,
     name: 'Nerdy Frost Wireless',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Keyboards',
     description: 'White wireless board, blue backlight, 3-device Bluetooth.',
     price: 1599,
@@ -327,7 +327,7 @@ export const products = [
   {
     id: 28,
     name: 'Nerdy Gamer Pro',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Keyboards',
     description: 'Gaming board with orange accents and dedicated macro keys.',
     price: 1999,
@@ -338,7 +338,7 @@ export const products = [
   {
     id: 29,
     name: 'Nerdy Tab Studio',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Tablets',
     description: '11" tablet with detachable keyboard folio, 256GB.',
     price: 9499,
@@ -347,7 +347,7 @@ export const products = [
   {
     id: 30,
     name: 'Nerdy Tab Air',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Tablets',
     description: 'Slim 10.9" tablet, 120Hz display, all-day battery.',
     price: 7499,
@@ -356,7 +356,7 @@ export const products = [
   {
     id: 31,
     name: 'Nerdy Tab Create',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Tablets',
     description: '10.2" tablet bundled with a precision stylus pen.',
     price: 6299,
@@ -365,7 +365,7 @@ export const products = [
   {
     id: 32,
     name: 'Nerdy Tab Rugged',
-    brand: 'NerdyTech',
+    brand: 'DugsonTech',
     department: 'Tablets',
     description: 'Shockproof tablet with built-in kickstand for the field.',
     price: 8299,

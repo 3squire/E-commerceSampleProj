@@ -65,9 +65,14 @@ justify-content:center;
 
 align-items:center;
 
-background:linear-gradient(to right,#0d47a1,#1976d2);
+background:
+linear-gradient(120deg,#061f45 0%,#075985 38%,#0d9488 72%,#84b91c 120%);
 
 color:white;
+
+border:1px solid rgba(180,216,58,.45);
+
+box-shadow:0 24px 55px rgba(6,31,69,.28);
 
 }
 
@@ -83,9 +88,9 @@ padding:15px 35px;
 
 margin-top:20px;
 
-background:white;
+background:#b4d83a;
 
-color:#0d47a1;
+color:#061f45;
 
 border:none;
 

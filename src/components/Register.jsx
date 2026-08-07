@@ -15,7 +15,7 @@ function Register() {
     <div className="register-page">
       <div className="register-container">
         <h1>Create Account</h1>
-        <p>Join NerdyTech today!</p>
+        <p>Join DugsonTech today!</p>
 
         <form onSubmit={handleRegister}>
           <input

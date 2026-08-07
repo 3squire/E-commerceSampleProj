@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import "./Home.css";
-import logo from "../assets/nerdytech.jpeg";
+import logo from "../assets/dugson-consulting.jpg";
 import { departments } from "../catalog.js";
 
 const APP_VERSION = '1.5'
@@ -37,11 +37,11 @@ function Home() {
       </section>
 
       <footer>
-        <img src={logo} alt="NerdyTech logo" className="footer-logo" />
-        <h3>NerdyTech</h3>
+        <img src={logo} alt="DugsonTech logo" className="footer-logo" />
+        <h3>DugsonTech</h3>
         <p>Smart Tech. Easy Shopping.</p>
         <p>Version {APP_VERSION}</p>
-        <p>© 2026 NerdyTech. All Rights Reserved.</p>
+        <p>© 2026 DugsonTech. All Rights Reserved.</p>
       </footer>
     </div>
   );

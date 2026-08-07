@@ -8,7 +8,7 @@ function Contact() {
       <div className="contact-header">
        
        
-        <h1>Contact NerdyTech</h1>
+        <h1>Contact DugsonTech</h1>
         <p>We're here to help with your questions, orders, and technical support.</p>
       </div>
 

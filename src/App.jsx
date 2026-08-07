@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Navigate, NavLink, Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 import './App.css'
 import './theme.css'
-import logo from './assets/nerdytech.jpeg'
+import logo from './assets/dugson-consulting.jpg'
 import Address, { defaultAddress } from './Address.jsx'
 import Cart, { starterCart } from './Cart.jsx'
 import Payment, { defaultPayment } from './Payment.jsx'
@@ -25,7 +25,7 @@ function App() {
   const [payment, setPayment] = useState(defaultPayment)
   const [cart, setCart] = useState(() => {
     try {
-      const savedCart = localStorage.getItem('nerdytech-cart')
+      const savedCart = localStorage.getItem('dugsontech-cart')
       return savedCart ? JSON.parse(savedCart) : starterCart
     } catch {
       return starterCart
@@ -33,25 +33,25 @@ function App() {
   })
   const [wishlist, setWishlist] = useState(() => {
     try {
-      const savedWishlist = localStorage.getItem('nerdytech-wishlist')
+      const savedWishlist = localStorage.getItem('dugsontech-wishlist')
       return savedWishlist ? JSON.parse(savedWishlist) : starterWishlist
     } catch {
       return starterWishlist
     }
   })
-  const [theme, setTheme] = useState(() => localStorage.getItem('nerdytech-theme') || 'dark')
+  const [theme, setTheme] = useState(() => localStorage.getItem('dugsontech-theme') || 'dark')
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
-    localStorage.setItem('nerdytech-theme', theme)
+    localStorage.setItem('dugsontech-theme', theme)
   }, [theme])
 
   useEffect(() => {
-    localStorage.setItem('nerdytech-wishlist', JSON.stringify(wishlist))
+    localStorage.setItem('dugsontech-wishlist', JSON.stringify(wishlist))
   }, [wishlist])
 
   useEffect(() => {
-    localStorage.setItem('nerdytech-cart', JSON.stringify(cart))
+    localStorage.setItem('dugsontech-cart', JSON.stringify(cart))
   }, [cart])
 
   const cartTotal = cart.reduce((sum, item) => sum + item.price * (item.quantity ?? 1), 0)
@@ -112,10 +112,10 @@ function App() {
       {!hideNav && (
       <header className="topbar">
         <NavLink to="/home" className="brand">
-          <img src={logo} alt="NerdyTech logo" />
+          <img src={logo} alt="DugsonTech logo" />
           <div>
-            <strong>NerdyTech</strong>
-            <span>Smart tech, simple checkout</span>
+            <strong>DugsonTech</strong>
+            <span>Smart tech, trusted solutions</span>
           </div>
         </NavLink>
 
@@ -211,5 +211,5 @@ function App() {
 }
 function Empty({title,copy,onClick,button}){return <div className="empty"><div>♡</div><h2>{title}</h2><p>{copy}</p><button className="primary-btn" onClick={onClick}>{button}</button></div>}
 function Collection({title,items,remove,action,actionText,back,checkout}){const total=items.reduce((s,p)=>s+p.price,0);return <main className="collection"><button className="back" onClick={back}>← Continue shopping</button><h1>{title}</h1>{items.length?<div className="collection-layout"><div>{items.map(p=><article className="line-item" key={p.id}><span>{p.icon}</span><div><p className="category">{p.department}</p><h3>{p.name}</h3><p>{p.specs}</p></div><strong>{price(p.price)}</strong><button className="remove" onClick={()=>remove(p.id)}>Remove</button>{action&&<button className="add-btn" onClick={()=>action(p)}>{actionText}</button>}</article>)}</div><aside><p>ORDER SUMMARY</p><div><span>Items ({items.length})</span><span>{price(total)}</span></div><div><span>Delivery</span><span>At checkout</span></div><hr/><strong>Total <span>{price(total)}</span></strong><button className="primary-btn" onClick={()=>checkout&&alert('Checkout is ready to connect to your payment provider.')}>{checkout?'Checkout':'Keep shopping'}</button></aside></div>:<Empty title={title==='Your cart'?'Your cart is empty':'Your wishlist is waiting'} copy="Explore our collection and save the tech you love." onClick={back} button="Browse products"/>}</main>}
-function Info({title,intro,sections,contact}){return <main className="info"><p className="eyebrow">NERDYTECH</p><h1>{title}</h1><p className="intro">{intro}</p>{contact&&<form className="contact-form" onSubmit={e=>e.preventDefault()}><input placeholder="Your name"/><input placeholder="Email address"/><textarea placeholder="How can we help?"/><button className="primary-btn">Send message</button></form>}<div>{sections.map(([h,p])=><section key={h}><h2>{h}</h2><p>{p}</p></section>)}</div></main>}
+function Info({title,intro,sections,contact}){return <main className="info"><p className="eyebrow">DUGSONTECH</p><h1>{title}</h1><p className="intro">{intro}</p>{contact&&<form className="contact-form" onSubmit={e=>e.preventDefault()}><input placeholder="Your name"/><input placeholder="Email address"/><textarea placeholder="How can we help?"/><button className="primary-btn">Send message</button></form>}<div>{sections.map(([h,p])=><section key={h}><h2>{h}</h2><p>{p}</p></section>)}</div></main>}
 export default App

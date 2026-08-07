@@ -6,7 +6,7 @@ function Policy() {
     <div className="policy-container">
 
       <div className="policy-header">
-        <h1>NerdyTech Store Policy</h1>
+        <h1>DugsonTech Store Policy</h1>
         <p>Your trusted technology shopping destination.</p>
       </div>
 
@@ -14,7 +14,7 @@ function Policy() {
         <h2>1. Orders</h2>
         <p>
           All orders are subject to product availability. Once your order has
-          been placed, you will receive an order confirmation. NerdyTech
+          been placed, you will receive an order confirmation. DugsonTech
           reserves the right to cancel any order due to pricing errors, stock
           shortages or suspected fraudulent activity.
         </p>
@@ -59,7 +59,7 @@ function Policy() {
       <section className="policy-section">
         <h2>6. Privacy Policy</h2>
         <p>
-          NerdyTech values your privacy. Customer information is used only for
+          DugsonTech values your privacy. Customer information is used only for
           processing orders, deliveries, customer support and improving your
           shopping experience. We never sell your personal information.
         </p>
@@ -86,7 +86,7 @@ function Policy() {
       <section className="policy-section">
         <h2>9. Limitation of Liability</h2>
         <p>
-          NerdyTech is not responsible for delays caused by courier services,
+          DugsonTech is not responsible for delays caused by courier services,
           incorrect delivery information supplied by customers or temporary
           website outages.
         </p>
@@ -95,15 +95,15 @@ function Policy() {
       <section className="policy-section">
         <h2>10. Contact Us</h2>
 
-        <p><strong>Email:</strong> support@nerdytech.co.za</p>
+        <p><strong>Email:</strong> support@dugsontech.co.za</p>
         <p><strong>Phone:</strong> +27 12 345 6789</p>
-        <p><strong>Website:</strong> www.nerdytech.co.za</p>
+        <p><strong>Website:</strong> www.dugsontech.co.za</p>
       </section>
 
       <section className="policy-section">
         <h2>11. Policy Updates</h2>
         <p>
-          NerdyTech reserves the right to update these policies at any time.
+          DugsonTech reserves the right to update these policies at any time.
           Changes become effective immediately after publication.
         </p>
       </section>

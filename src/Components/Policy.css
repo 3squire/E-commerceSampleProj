@@ -30,14 +30,20 @@
 }
 
 .policy-section h2 {
-    color: #0b4da2;
+    color: #84b91c;
     margin-bottom: 15px;
+    font-weight: 800;
 }
 
 .policy-section p,
 .policy-section li {
     font-size: 17px;
     line-height: 1.8;
+    color: #061f45;
+}
+
+.policy-section strong {
+    color: #061f45;
 }
 
 .policy-section ul {
