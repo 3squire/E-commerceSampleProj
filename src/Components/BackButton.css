@@ -1,0 +1,31 @@
+.back-button {
+  background-color: #A8C63B;
+  color: #fff;
+  border: none;
+  border-radius: 18px;
+  padding: 5px 12px;
+  width: 75px;
+  height: 32px;
+
+  font-size: 13px;
+  font-weight: 600;
+  font-family: "Segoe UI", sans-serif;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.back-button:hover {
+  background-color: #A8C63B; /* DUGSON Green */
+  color: #1B245E;
+  transform: translateY(-2px);
+}
+
+.back-button:active {
+  transform: scale(0.96);
+}

@@ -1,3 +1,4 @@
+import BackButton from './BackButton'
 import './Cart.css'
 
 function Cart({cart, setCart, goBack}) {
@@ -131,6 +132,7 @@ Proceed to Checkout
 )}
 
 
+<BackButton />
 </div>
 
 )

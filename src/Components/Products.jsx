@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import './Products.css'
 import { departments, products } from '../catalog.js'
+import BackButton from './BackButton' 
 
 function Products({ addToCart, addToWishlist }) {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -172,6 +173,8 @@ function Products({ addToCart, addToWishlist }) {
           </section>
         </div>
       )}
+      
+      <BackButton />
     </div>
   )
 }
