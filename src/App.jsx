@@ -17,6 +17,7 @@ import ProductDetails from './components/ProductDetails.jsx'
 import Policy from "./components/Policy";
 import Contact from "./components/Contact";
 import Spinner from './components/Spinner.jsx'
+import ChatBot from './components/ChatBot.jsx'
 
 const pageTitles = {
   '/': 'Login',
@@ -235,6 +236,8 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
+
+      <ChatBot />
     </div>
   )
 }
