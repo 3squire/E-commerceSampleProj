@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import './Wishlist.css'
+import BackButton from './Components/BackButton'
 
 export const starterWishlist = []
 
@@ -160,6 +161,7 @@ function Wishlist({ wishlist: providedWishlist, setWishlist: providedSetWishlist
           </div>
         </>
       )}
+      <BackButton />
     </section>
   )
 }

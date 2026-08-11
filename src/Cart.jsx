@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './Cart.css'
+import BackButton from './Components/BackButton'
 
 export const starterCart = []
 
@@ -98,6 +99,7 @@ function Cart({ cart: providedCart, setCart: providedSetCart, onCheckout, onCont
           </div>
         </>
       )}
+      <BackButton />
     </section>
   )
 }
