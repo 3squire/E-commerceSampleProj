@@ -39,7 +39,7 @@ Your cart is empty
 </h3>
 
 <p>
-Add some amazing technology from NerdyTech.
+Add some amazing technology from DugsonTech.
 </p>
 
 <button onClick={goBack}>
