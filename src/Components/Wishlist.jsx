@@ -3,6 +3,7 @@ import techyImage from "../assets/techy.jpeg";
 import Address from './Address.jsx'
 import Payment from './Payment.jsx'
 import './Wishlist.css'
+import BackButton from './BackButton.jsx'
 
 
 const featuredItems = [
@@ -239,6 +240,7 @@ function Wishlist() {
           </div>
         )}
       </main>
+      <BackButton />
     </div>
   )
 }

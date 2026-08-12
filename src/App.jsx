@@ -16,6 +16,24 @@ import Products from './components/Products.jsx'
 import ProductDetails from './components/ProductDetails.jsx'
 import Policy from "./components/Policy";
 import Contact from "./components/Contact";
+import Spinner from './components/Spinner.jsx'
+import ChatBot from './components/ChatBot.jsx'
+
+const pageTitles = {
+  '/': 'Login',
+  '/register': 'Create account',
+  '/forgot-password': 'Reset password',
+  '/home': 'Home',
+  '/products': 'Products',
+  '/productdetails': 'Product details',
+  '/cart': 'Your cart',
+  '/wishlist': 'Wishlist',
+  '/address': 'Delivery address',
+  '/payment': 'Payment',
+  '/order-confirmed': 'Order confirmed',
+  '/contact': 'Contact us',
+  '/policy': 'Policies',
+}
 
 function App() {
   const navigate = useNavigate()
@@ -40,11 +58,22 @@ function App() {
     }
   })
   const [theme, setTheme] = useState(() => localStorage.getItem('dugsontech-theme') || 'dark')
+  const [isNavigating, setIsNavigating] = useState(false)
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
     localStorage.setItem('dugsontech-theme', theme)
   }, [theme])
+
+  useEffect(() => {
+    setIsNavigating(true)
+    const timer = setTimeout(() => setIsNavigating(false), 350)
+    return () => clearTimeout(timer)
+  }, [location.pathname])
+
+  useEffect(() => {
+    document.title = `${pageTitles[location.pathname] || 'DugsonTech'} | DugsonTech`
+  }, [location.pathname])
 
   useEffect(() => {
     localStorage.setItem('dugsontech-wishlist', JSON.stringify(wishlist))
@@ -109,6 +138,7 @@ function App() {
 
   return (
     <div className={`app-shell ${theme === 'light' ? 'light-mode' : 'dark-mode'}`}>
+      {isNavigating && <Spinner />}
       {!hideNav && (
       <header className="topbar">
         <NavLink to="/home" className="brand">
@@ -206,6 +236,8 @@ function App() {
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </main>
+
+      <ChatBot />
     </div>
   )
 }

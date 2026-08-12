@@ -1,3 +1,4 @@
+import BackButton from './BackButton'
 import './Cart.css'
 
 function Cart({cart, setCart, goBack}) {
@@ -38,7 +39,7 @@ Your cart is empty
 </h3>
 
 <p>
-Add some amazing technology from NerdyTech.
+Add some amazing technology from DugsonTech.
 </p>
 
 <button onClick={goBack}>
@@ -131,6 +132,7 @@ Proceed to Checkout
 )}
 
 
+<BackButton />
 </div>
 
 )

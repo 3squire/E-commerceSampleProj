@@ -1,0 +1,41 @@
+.spinner-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  background: rgba(8, 13, 29, 0.55);
+  backdrop-filter: blur(2px);
+}
+
+.light-mode .spinner-overlay {
+  background: rgba(239, 247, 255, 0.65);
+}
+
+.spinner-wheel {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  border: 4px solid rgba(0, 224, 255, 0.22);
+  border-top-color: rgba(0, 224, 255, 0.95);
+  animation: spinner-rotate 0.8s linear infinite;
+}
+
+.spinner-label {
+  color: #dfefff;
+  font-size: 0.9rem;
+  letter-spacing: 0.02em;
+}
+
+.light-mode .spinner-label {
+  color: #174d91;
+}
+
+@keyframes spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
