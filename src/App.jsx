@@ -18,11 +18,13 @@ import Policy from "./components/Policy";
 import Contact from "./components/Contact";
 import Spinner from './components/Spinner.jsx'
 import ChatBot from './components/ChatBot.jsx'
+import { createOrder, confirmOrder } from './api.js'
 
 const pageTitles = {
   '/': 'Login',
   '/register': 'Create account',
-  '/forgot-password': 'Reset password',
+  '/forgot-password': 'Forgot password',
+  '/reset-password': 'Reset password',
   '/home': 'Home',
   '/products': 'Products',
   '/productdetails': 'Product details',
@@ -38,7 +40,7 @@ const pageTitles = {
 function App() {
   const navigate = useNavigate()
   const location = useLocation()
-  const hideNav = ['/', '/register', '/forgot-password'].includes(location.pathname)
+  const hideNav = ['/', '/register', '/forgot-password', '/reset-password'].includes(location.pathname)
   const [address, setAddress] = useState(defaultAddress)
   const [payment, setPayment] = useState(defaultPayment)
   const [cart, setCart] = useState(() => {
@@ -59,6 +61,8 @@ function App() {
   })
   const [theme, setTheme] = useState(() => localStorage.getItem('dugsontech-theme') || 'dark')
   const [isNavigating, setIsNavigating] = useState(false)
+  const [isPlacingOrder, setIsPlacingOrder] = useState(false)
+  const [orderError, setOrderError] = useState('')
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -130,10 +134,21 @@ function App() {
     setPayment((currentPayment) => ({ ...currentPayment, [name]: value }))
   }
 
-  const handlePaymentSubmit = (event) => {
+  const handlePaymentSubmit = async (event) => {
     event.preventDefault()
-    setCart([])
-    navigate('/order-confirmed')
+    setOrderError('')
+    setIsPlacingOrder(true)
+
+    try {
+      const order = await createOrder({ cart, address, paymentMethod: payment.paymentMethod })
+
+      await confirmOrder(order.orderId)
+      navigate(`/order-confirmed?orderId=${order.orderId}`)
+    } catch (error) {
+      setOrderError(error.message)
+    } finally {
+      setIsPlacingOrder(false)
+    }
   }
 
   return (
@@ -201,6 +216,7 @@ function App() {
                 onChange={handleAddressChange}
                 onSubmit={handleAddressSubmit}
                 onBack={() => navigate('/cart')}
+                cart={cart}
               />
             }
           />
@@ -215,6 +231,9 @@ function App() {
                 address={address}
                 total={combinedTotal}
                 itemCount={cartItemCount}
+                cart={cart}
+                isSubmitting={isPlacingOrder}
+                error={orderError}
               />
             }
           />
@@ -231,7 +250,7 @@ function App() {
           />
           <Route
             path="/order-confirmed"
-            element={<OrderConfirmation address={address} onBackHome={() => navigate('/home')} />}
+            element={<OrderConfirmation address={address} setCart={setCart} onBackHome={() => navigate('/home')} />}
           />
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>

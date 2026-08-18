@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import './Address.css'
+import { getDeliveryQuote } from './delivery.js'
 
 const southAfricanProvinces = [
   'Eastern Cape',
@@ -22,10 +23,11 @@ export const defaultAddress = {
   phone: '',
 }
 
-function Address({ address: providedAddress, onChange, onSubmit, onBack }) {
+function Address({ address: providedAddress, onChange, onSubmit, onBack, cart = [] }) {
   const [formAddress, setFormAddress] = useState(defaultAddress)
   const isControlled = providedAddress !== undefined && typeof onChange === 'function'
   const address = isControlled ? providedAddress : formAddress
+  const delivery = getDeliveryQuote(cart)
 
   const sanitizeValue = (name, value) => {
     if (name === 'postalCode') {
@@ -96,6 +98,11 @@ function Address({ address: providedAddress, onChange, onSubmit, onBack }) {
           <button type="button" className="text-btn" onClick={onBack ?? (() => {})}>
             Back
           </button>
+        </div>
+
+        <div className="courier-notice">
+          <span className="courier-badge">The Courier Guy</span>
+          <p>R{delivery.fee.toLocaleString()} delivery fee ({delivery.label}), 2 - 4 business days nationwide.</p>
         </div>
 
         <div className="form-grid">

@@ -95,13 +95,24 @@
 
 .cart-summary {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   gap: 12px;
   padding: 14px 16px;
   border-radius: 18px;
   background: rgba(9, 14, 30, 0.9);
   border: 1px solid rgba(0, 224, 255, 0.18);
+}
+
+.cart-summary .order-totals {
+  border-top: none;
+  padding-top: 0;
+  margin-top: 0;
+  color: #aac4f2;
+}
+
+.cart-summary h3 {
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 224, 255, 0.18);
 }
 
 .empty-state {
@@ -116,6 +127,18 @@
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.order-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.order-totals > div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
 }
 
 /* Shared button styles for the cart/checkout pages */

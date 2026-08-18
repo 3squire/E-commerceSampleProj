@@ -80,3 +80,20 @@
 .login-link a:hover {
   text-decoration: underline;
 }
+
+.form-error {
+  color: #dc2626;
+  font-size: 14px;
+  margin-bottom: 14px;
+  text-align: center;
+}
+
+.email-preview-note {
+  font-size: 14px;
+  margin-bottom: 20px;
+}
+
+.email-preview-note a {
+  color: #2563eb;
+  font-weight: bold;
+}

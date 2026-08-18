@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import './Cart.css'
 import BackButton from './Components/BackButton'
+import { getVatBreakdown } from './vat.js'
+import { getDeliveryQuote } from './delivery.js'
 
 export const starterCart = []
 
@@ -32,6 +34,9 @@ function Cart({ cart: providedCart, setCart: providedSetCart, onCheckout, onCont
 
   const total = cart.reduce((sum, item) => sum + item.price * (item.quantity ?? 1), 0)
   const itemCount = cart.reduce((sum, item) => sum + (item.quantity ?? 1), 0)
+  const { subtotal, vat } = getVatBreakdown(total)
+  const delivery = getDeliveryQuote(cart)
+  const grandTotal = total + delivery.fee
 
   return (
     <section className="cart-page">
@@ -83,7 +88,21 @@ function Cart({ cart: providedCart, setCart: providedSetCart, onCheckout, onCont
           </div>
 
           <div className="cart-summary">
-            <h3>Total: R{total.toLocaleString()}</h3>
+            <div className="order-totals">
+              <div>
+                <span>Subtotal (excl. VAT)</span>
+                <span>R{subtotal.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+              </div>
+              <div>
+                <span>VAT (15%)</span>
+                <span>R{vat.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+              </div>
+              <div>
+                <span>Delivery - The Courier Guy ({delivery.label})</span>
+                <span>R{delivery.fee.toLocaleString()}</span>
+              </div>
+            </div>
+            <h3>Total: R{grandTotal.toLocaleString()}</h3>
             <div className="checkout-actions">
               {onContinueShopping ? (
                 <button className="text-btn" onClick={onContinueShopping}>

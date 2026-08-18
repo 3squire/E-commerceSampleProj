@@ -36,3 +36,12 @@
 .order-confirmation__card .primary-btn {
   margin-top: 8px;
 }
+
+.order-confirmation__status {
+  font-weight: 600;
+  color: #7ee7ff;
+}
+
+.order-confirmation__status--error {
+  color: #ff8dbd;
+}

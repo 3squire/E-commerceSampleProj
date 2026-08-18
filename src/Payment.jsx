@@ -1,5 +1,7 @@
 import { useState } from 'react'
 import './Payment.css'
+import { getVatBreakdown } from './vat.js'
+import { getDeliveryQuote } from './delivery.js'
 
 export const defaultPayment = {
   paymentMethod: '',
@@ -11,13 +13,16 @@ export const defaultPayment = {
   paypalPassword: '',
 }
 
-function Payment({ payment: providedPayment, onChange, onSubmit, onBack, address = { fullName: '' }, total = 0, itemCount = 0 }) {
+function Payment({ payment: providedPayment, onChange, onSubmit, onBack, address = { fullName: '' }, total = 0, itemCount = 0, cart = [], isSubmitting = false, error = '' }) {
   const [formPayment, setFormPayment] = useState(defaultPayment)
   const isControlled = providedPayment !== undefined && typeof onChange === 'function'
   const payment = isControlled ? providedPayment : formPayment
 
   const effectiveTotal = total || 0
   const effectiveItemCount = itemCount || 0
+  const { subtotal, vat } = getVatBreakdown(effectiveTotal)
+  const delivery = getDeliveryQuote(cart)
+  const grandTotal = effectiveTotal + delivery.fee
 
   const sanitizeValue = (name, value) => {
     if (name === 'cardNumber') {
@@ -91,7 +96,25 @@ function Payment({ payment: providedPayment, onChange, onSubmit, onBack, address
 
       <div className="payment-summary">
         <p>Delivering to {effectiveAddress?.fullName || 'your address'}</p>
-        <p>{effectiveItemCount} cart {effectiveItemCount === 1 ? 'item' : 'items'} • Total R{effectiveTotal.toLocaleString()}</p>
+        <p>{effectiveItemCount} cart {effectiveItemCount === 1 ? 'item' : 'items'}</p>
+        <div className="order-totals">
+          <div>
+            <span>Subtotal (excl. VAT)</span>
+            <span>R{subtotal.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+          </div>
+          <div>
+            <span>VAT (15%)</span>
+            <span>R{vat.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+          </div>
+          <div>
+            <span>Delivery - The Courier Guy ({delivery.label})</span>
+            <span>R{delivery.fee.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+          </div>
+          <div className="order-totals__grand">
+            <span>Total</span>
+            <span>R{grandTotal.toLocaleString(undefined, { maximumFractionDigits: 2 })}</span>
+          </div>
+        </div>
       </div>
 
       <div className="form-grid">
@@ -168,10 +191,12 @@ function Payment({ payment: providedPayment, onChange, onSubmit, onBack, address
         )}
       </div>
 
+      {error && <p className="payment-error">{error}</p>}
+
       <div className="address-form__footer payment-form__footer">
         <span className="payment-form__hint">Secure checkout</span>
-        <button type="submit" className="primary-btn">
-          Pay now
+        <button type="submit" className="primary-btn" disabled={isSubmitting}>
+          {isSubmitting ? 'Processing…' : 'Pay now'}
         </button>
       </div>
     </form>

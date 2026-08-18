@@ -26,3 +26,36 @@
   outline: 2px solid #7ee7ff;
   outline-offset: 2px;
 }
+
+.order-totals {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px solid rgba(0, 224, 255, 0.2);
+}
+
+.order-totals > div {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.9rem;
+}
+
+.order-totals__grand {
+  margin-top: 4px;
+  padding-top: 6px;
+  border-top: 1px solid rgba(0, 224, 255, 0.2);
+  font-weight: 700;
+  font-size: 1.05rem !important;
+}
+
+.payment-error {
+  margin-top: 14px;
+  padding: 10px 14px;
+  border-radius: 10px;
+  background: rgba(255, 45, 149, 0.12);
+  border: 1px solid rgba(255, 45, 149, 0.3);
+  color: #ff8dbd;
+  font-size: 0.9rem;
+}
