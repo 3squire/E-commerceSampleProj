@@ -1,82 +1,140 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial, Helvetica, sans-serif;
 }
 
-.register-page {
-  height: 100vh;
-  background: linear-gradient(135deg, #081b29, #0f2c45);
-  display: flex;
-  justify-content: center;
-  align-items: center;
+body{
+    background:#0D2B60;
 }
 
-.register-container {
-  width: 400px;
-  background: white;
-  padding: 40px;
-  border-radius: 15px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+.container{
+    display:flex;
+    height:100vh;
 }
 
-.register-container h1 {
-  text-align: center;
-  color: #2563eb;
-  margin-bottom: 10px;
+.left{
+    flex:1;
+    background:linear-gradient(135deg,#0D2B60,#00447A,#8DBC0B);
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    color:#FFFFFF;
 }
 
-.register-container p {
-  text-align: center;
-  color: #666;
-  margin-bottom: 25px;
+.left h1{
+    font-size:60px;
+    margin-bottom:20px;
+    color: #8DBC0B
 }
 
-.register-container form {
-  display: flex;
-  flex-direction: column;
+.left p{
+    font-size:20px;
+    color:#FFFFFF;
 }
 
-.register-container input {
-  padding: 14px;
-  margin-bottom: 18px;
-  border: 1px solid #ccc;
-  border-radius: 8px;
-  font-size: 15px;
+.left img.logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
 }
 
-.register-container input:focus {
-  border-color: #2563eb;
-  outline: none;
+.right{
+    flex:1;
+    background:#FFFFFF;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    padding:60px;
 }
 
-.register-container button {
-  padding: 14px;
-  border: none;
-  border-radius: 8px;
-  background: #2563eb;
-  color: white;
-  font-size: 16px;
-  cursor: pointer;
-  transition: 0.3s;
+.register-card{
+    width:100%;
+    max-width:380px;
+    display:flex;
+    flex-direction:column;
 }
 
-.register-container button:hover {
-  background: #1d4ed8;
+.register-card h2{
+    font-size:34px;
+    margin-bottom:8px;
+    text-align:center;
+    color:#0D2B60;
 }
 
-.login-link {
-  margin-top: 20px;
-  text-align: center;
+.register-card > p{
+    margin-bottom:32px;
+    color:#00447A;
+    text-align:center;
 }
 
-.login-link a {
-  color: #2563eb;
-  text-decoration: none;
-  font-weight: bold;
+.right form{
+    display:flex;
+    flex-direction:column;
 }
 
-.login-link a:hover {
-  text-decoration: underline;
+.right input{
+    padding:15px;
+    margin-bottom:16px;
+    font-size:16px;
+    border:2px solid #8DBC0B;
+    border-radius:8px;
+    outline:none;
+    transition:0.3s;
+}
+
+.right input:focus{
+    border-color:#8DBC0B;
+    box-shadow:0 0 8px rgba(141,188,11,.3);
+}
+
+.right button{
+    padding:15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-size:16px;
+    margin-bottom:15px;
+    transition:0.3s;
+    font-weight:bold;
+}
+
+.right button:hover{
+    transform:translateY(-2px);
+}
+
+.right form button{
+    background:#0D2B60;
+    color:white;
+}
+
+.right form button:hover{
+    background:#00447A;
+}
+
+.divider{
+    text-align:center;
+    margin:20px 0;
+    color:#00447A;
+    font-weight:bold;
+}
+
+.login-link{
+    text-align:center;
+    color:#00447A;
+    font-size:14px;
+}
+
+.login-link a{
+    text-decoration:none;
+    color:#8DBC0B;
+    font-weight:bold;
+}
+
+.login-link a:hover{
+    text-decoration:underline;
 }
