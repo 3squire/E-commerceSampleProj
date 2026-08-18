@@ -34,7 +34,6 @@ function Payment({
             </option>
             <option value="Mastercard">Mastercard</option>
             <option value="PayPal">PayPal</option>
-            <option value="EFT">EFT</option>
           </select>
         </label>
 
