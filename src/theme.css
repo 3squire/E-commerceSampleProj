@@ -263,11 +263,15 @@
   color: #ffffff !important;
 }
 
-.app-shell .home-page .categories h2,
+.app-shell .home-page .categories h2 {
+  color: #061f45 !important;
+}
+
 .app-shell .home-page .category-card p {
   color: #061f45 !important;
 }
 
-:root[data-theme='dark'] .app-shell .home-page .categories h2 {
+:root[data-theme='dark'] .app-shell .home-page .categories h2,
+:root[data-theme='dark'] .app-shell .home-page .category-card p {
   color: #ffffff !important;
 }
