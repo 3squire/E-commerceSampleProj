@@ -40,6 +40,7 @@ function Login() {
       }
 
       localStorage.setItem('dugsontech-user', JSON.stringify(data));
+      window.dispatchEvent(new Event('dugsontech-auth-changed'));
       navigate('/home');
     } catch (err) {
       console.error('Login error:', err);

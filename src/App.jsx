@@ -37,10 +37,23 @@ const pageTitles = {
   '/policy': 'Policies',
 }
 
+const getStoredUser = () => {
+  try {
+    const storedUser = localStorage.getItem('dugsontech-user')
+    return storedUser ? JSON.parse(storedUser) : null
+  } catch {
+    return null
+  }
+}
+
+const getWishlistStorageKey = (user) =>
+  user?.email ? `dugsontech-wishlist:${encodeURIComponent(user.email)}` : null
+
 function App() {
   const navigate = useNavigate()
   const location = useLocation()
   const hideNav = ['/', '/register', '/forgot-password', '/reset-password'].includes(location.pathname)
+  const [currentUser, setCurrentUser] = useState(getStoredUser)
   const [address, setAddress] = useState(defaultAddress)
   const [payment, setPayment] = useState(defaultPayment)
   const [cart, setCart] = useState(() => {
@@ -51,18 +64,39 @@ function App() {
       return starterCart
     }
   })
-  const [wishlist, setWishlist] = useState(() => {
-    try {
-      const savedWishlist = localStorage.getItem('dugsontech-wishlist')
-      return savedWishlist ? JSON.parse(savedWishlist) : starterWishlist
-    } catch {
-      return starterWishlist
-    }
-  })
+  const [wishlist, setWishlist] = useState(starterWishlist)
+  const [wishlistOwnerKey, setWishlistOwnerKey] = useState(null)
   const [theme, setTheme] = useState(() => localStorage.getItem('dugsontech-theme') || 'dark')
   const [isNavigating, setIsNavigating] = useState(false)
   const [isPlacingOrder, setIsPlacingOrder] = useState(false)
   const [orderError, setOrderError] = useState('')
+
+  useEffect(() => {
+    const handleAuthChange = () => {
+      setWishlist([])
+      setWishlistOwnerKey(null)
+      setCurrentUser(getStoredUser())
+    }
+    window.addEventListener('dugsontech-auth-changed', handleAuthChange)
+    return () => window.removeEventListener('dugsontech-auth-changed', handleAuthChange)
+  }, [])
+
+  useEffect(() => {
+    const storageKey = getWishlistStorageKey(currentUser)
+    let savedWishlist = starterWishlist
+
+    if (storageKey) {
+      try {
+        const storedWishlist = localStorage.getItem(storageKey)
+        savedWishlist = storedWishlist ? JSON.parse(storedWishlist) : starterWishlist
+      } catch {
+        savedWishlist = starterWishlist
+      }
+    }
+
+    setWishlist(savedWishlist)
+    setWishlistOwnerKey(storageKey)
+  }, [currentUser])
 
   useEffect(() => {
     document.documentElement.dataset.theme = theme
@@ -80,8 +114,9 @@ function App() {
   }, [location.pathname])
 
   useEffect(() => {
-    localStorage.setItem('dugsontech-wishlist', JSON.stringify(wishlist))
-  }, [wishlist])
+    if (!wishlistOwnerKey || wishlistOwnerKey !== getWishlistStorageKey(currentUser)) return
+    localStorage.setItem(wishlistOwnerKey, JSON.stringify(wishlist))
+  }, [currentUser, wishlist, wishlistOwnerKey])
 
   useEffect(() => {
     localStorage.setItem('dugsontech-cart', JSON.stringify(cart))

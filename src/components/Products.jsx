@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import { Link, useSearchParams } from 'react-router-dom'
 import './Products.css'
 import { departments, products } from '../catalog.js'
-import BackButton from './BackButton' 
+import BackButton from './BackButton'
 
 function Products({ addToCart, addToWishlist }) {
   const [searchParams, setSearchParams] = useSearchParams()
@@ -10,10 +10,15 @@ function Products({ addToCart, addToWishlist }) {
   const [searchTerm, setSearchTerm] = useState('')
   const [submittedSearch, setSubmittedSearch] = useState('')
   const [selectedProduct, setSelectedProduct] = useState(null)
+  const [notes, setNotes] = useState({})
 
   useEffect(() => {
     if (!selectedProduct) return undefined
-    const closeOnEscape = (event) => event.key === 'Escape' && setSelectedProduct(null)
+
+    const closeOnEscape = (event) => {
+      if (event.key === 'Escape') setSelectedProduct(null)
+    }
+
     document.addEventListener('keydown', closeOnEscape)
     document.body.classList.add('modal-open')
     return () => {
@@ -29,21 +34,18 @@ function Products({ addToCart, addToWishlist }) {
     return matchesDepartment && matchesSearch
   })
 
-  // Tracks the most recent action per product id so we can show a brief note.
-  const [notes, setNotes] = useState({})
-
   const flashNote = (id, message) => {
     setNotes((current) => ({ ...current, [id]: message }))
   }
 
   const handleAddToCart = (product) => {
     const added = addToCart?.(product)
-    flashNote(product.id, added === false ? 'Already in cart' : 'Added to cart ✓')
+    flashNote(product.id, added === false ? 'Already in cart' : 'Added to cart')
   }
 
   const handleAddToWishlist = (product) => {
     const added = addToWishlist?.(product)
-    flashNote(product.id, added === false ? 'Already saved' : 'Added to wishlist ✓')
+    flashNote(product.id, added === false ? 'Already saved' : 'Added to wishlist')
   }
 
   const handleSearch = (event) => {
@@ -79,15 +81,11 @@ function Products({ addToCart, addToWishlist }) {
           <select value={department || ''} onChange={handleDepartmentChange}>
             <option value="">All departments</option>
             {departments.map((item) => (
-              <option key={item.name} value={item.name}>
-                {item.name}
-              </option>
+              <option key={item.name} value={item.name}>{item.name}</option>
             ))}
           </select>
         </label>
-        <button className="primary-btn products-search__button" type="submit">
-          Search
-        </button>
+        <button className="primary-btn products-search__button" type="submit">Search</button>
       </form>
 
       <div className="products-header">
@@ -95,16 +93,10 @@ function Products({ addToCart, addToWishlist }) {
           <p className="eyebrow">Shop</p>
           <h2>{department || 'Latest Technology'}</h2>
           <p className="products-description">
-            {department
-              ? `Browse our ${department} range.`
-              : 'Explore premium gadgets selected by DugsonTech.'}
+            {department ? `Browse our ${department} range.` : 'Explore premium gadgets selected by DugsonTech.'}
           </p>
         </div>
-        {department ? (
-          <Link className="ghost-btn products-reset" to="/products">
-            ← All products
-          </Link>
-        ) : null}
+        {department ? <Link className="ghost-btn products-reset" to="/products">All products</Link> : null}
       </div>
 
       {(department || submittedSearch) && (
@@ -112,7 +104,7 @@ function Products({ addToCart, addToWishlist }) {
           <span>
             Showing {visibleProducts.length} product{visibleProducts.length === 1 ? '' : 's'}
             {department ? ` in ${department}` : ''}
-            {submittedSearch ? ` for “${submittedSearch}”` : ''}
+            {submittedSearch ? ` for "${submittedSearch}"` : ''}
           </span>
           <button type="button" onClick={clearFilters}>Clear filters</button>
         </div>
@@ -120,34 +112,35 @@ function Products({ addToCart, addToWishlist }) {
 
       {visibleProducts.length === 0 ? (
         <p className="products-empty">
-          No products match your search.{' '}
-          <button type="button" className="products-empty__link" onClick={clearFilters}>View all products</button>
+          No products match your search. <button type="button" className="products-empty__link" onClick={clearFilters}>View all products</button>
         </p>
       ) : (
         <div className="products-grid">
           {visibleProducts.map((product) => (
-            <article className="tech-card" key={product.id} tabIndex="0" role="button" aria-label={`View ${product.name}`} onClick={() => setSelectedProduct(product)} onKeyDown={(event) => {
-              if (event.key === 'Enter' || event.key === ' ') {
-                event.preventDefault()
-                setSelectedProduct(product)
-              }
-            }}>
+            <article
+              className="tech-card"
+              key={product.id}
+              tabIndex="0"
+              role="button"
+              aria-label={`View ${product.name}`}
+              onClick={() => setSelectedProduct(product)}
+              onKeyDown={(event) => {
+                if (event.key === 'Enter' || event.key === ' ') {
+                  event.preventDefault()
+                  setSelectedProduct(product)
+                }
+              }}
+            >
               <img className="tech-card__img" src={product.image} alt={product.name} />
               <p className="product-brand">{product.department}</p>
               <h3>{product.name}</h3>
               <p className="tech-card__desc">{product.description}</p>
               <strong>R{product.price.toLocaleString()}</strong>
-              <span className="tech-card__view">View product details →</span>
-
+              <span className="tech-card__view">View product details</span>
               <div className="tech-card__actions">
-                <button className="primary-btn product-cart-btn" onClick={(event) => { event.stopPropagation(); handleAddToCart(product) }}>
-                  Add to Cart
-                </button>
-                <button className="ghost-btn" onClick={(event) => { event.stopPropagation(); handleAddToWishlist(product) }}>
-                  Add to Wishlist
-                </button>
+                <button className="primary-btn product-cart-btn" onClick={(event) => { event.stopPropagation(); handleAddToCart(product) }}>Add to Cart</button>
+                <button className="ghost-btn" onClick={(event) => { event.stopPropagation(); handleAddToWishlist(product) }}>Add to Wishlist</button>
               </div>
-
               {notes[product.id] ? <p className="tech-card__note">{notes[product.id]}</p> : null}
             </article>
           ))}
@@ -157,7 +150,7 @@ function Products({ addToCart, addToWishlist }) {
       {selectedProduct && (
         <div className="product-modal" role="presentation" onClick={() => setSelectedProduct(null)}>
           <section className="product-modal__card" role="dialog" aria-modal="true" aria-labelledby="selected-product-title" onClick={(event) => event.stopPropagation()}>
-            <button className="product-modal__close" type="button" onClick={() => setSelectedProduct(null)} aria-label="Close product details">×</button>
+            <button className="product-modal__close" type="button" onClick={() => setSelectedProduct(null)} aria-label="Close product details">x</button>
             <img src={selectedProduct.image} alt={selectedProduct.name} />
             <div className="product-modal__content">
               <p className="product-brand">{selectedProduct.department}</p>
@@ -173,7 +166,7 @@ function Products({ addToCart, addToWishlist }) {
           </section>
         </div>
       )}
-      
+
       <BackButton />
     </div>
   )
