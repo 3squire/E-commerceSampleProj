@@ -206,7 +206,7 @@ function App() {
           <NavLink to="/wishlist">Wishlist</NavLink>
           <NavLink to="/contact">Contact</NavLink>
           <NavLink to="/policy">Policy</NavLink>
-          <NavLink to="/">Login</NavLink>
+          <NavLink to="/login">Sign Out</NavLink>
           <button
             type="button"
             className="theme-toggle"
