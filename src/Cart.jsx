@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import './Cart.css'
-import BackButton from './Components/BackButton'
+import BackButton from './components/BackButton'
 import { getVatBreakdown } from './vat.js'
 import { getDeliveryQuote } from './delivery.js'
 
