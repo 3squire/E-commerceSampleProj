@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import './Wishlist.css'
-import BackButton from './Components/BackButton'
+import BackButton from './components/BackButton'
 
 export const starterWishlist = []
 
