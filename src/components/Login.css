@@ -11,7 +11,7 @@ body{
 
 .container{
     display:flex;
-    height:100vh;
+    min-height:100vh;
 }
 
 .left{
@@ -169,16 +169,28 @@ body{
 }
 
 .left{
-    height:35vh;
+    height:auto;
+    padding:32px 20px;
 }
 
 .right{
-    height:65vh;
-    padding:30px;
+    height:auto;
+    padding:32px 20px;
 }
 
 .left h1{
-    font-size:40px;
+    font-size:32px;
+    margin-bottom:10px;
+}
+
+.left p{
+    font-size:16px;
+}
+
+.left > .logo, .left .logo{
+    width:80px;
+    height:80px;
+    margin-bottom:12px;
 }
 
 }
