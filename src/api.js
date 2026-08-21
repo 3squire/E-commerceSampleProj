@@ -15,9 +15,18 @@ async function request(path, options) {
     throw new Error('Could not reach the DugsonTech server. Is it running?')
   }
 
+  // A static host with no real API will often serve index.html (200 OK) for
+  // any unmatched path instead of a proper 404, so a non-JSON response here
+  // usually means "there's no backend at this URL" rather than a real error.
+  const isJson = (response.headers.get('content-type') || '').includes('application/json')
+
   if (!response.ok) {
-    const body = await response.json().catch(() => ({}))
+    const body = isJson ? await response.json().catch(() => ({})) : {}
     throw new Error(body.error || `Request failed (${response.status}).`)
+  }
+
+  if (!isJson) {
+    throw new Error('The DugsonTech server is not reachable from this address. Checkout is unavailable.')
   }
 
   return response.json()
