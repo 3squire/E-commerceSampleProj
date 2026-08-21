@@ -1,4 +1,8 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? 'http://localhost:4000'
+// Empty string means "same origin" — correct in production, where the
+// Express server serves both the built frontend and the API. Local dev sets
+// VITE_API_BASE_URL (see .env) since the frontend and API run on different
+// ports there.
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? ''
 
 async function request(path, options) {
   let response
